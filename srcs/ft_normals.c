@@ -53,6 +53,19 @@ void	square_normal(t_scene *scene)
 	scene->normal = square->normal;
 }
 
+void	triangle_normal(t_scene *scene)
+{
+	t_triangle		*triangle;
+	t_vector		v1;
+	t_vector		v2;
+
+	triangle = (t_triangle *)scene->object;
+	v1 = ft_vector_sub(triangle->B, triangle->A);
+	v2 =  ft_vector_sub(triangle->C, triangle->A);
+	scene->normal = cross_product(&v1, &v2);
+	scene->normal = getNormalized(scene->normal);
+}
+
 void		ft_get_normal(t_env *e, t_scene *head)
 {
 	t_vector	scaled;
@@ -70,4 +83,6 @@ void		ft_get_normal(t_env *e, t_scene *head)
 		square_normal(scene);
 	else if (scene->type == Tcylinder)
 		cylinder_normal(e, scene);
+	else if (scene->type == Ttriangle)
+		triangle_normal(scene);
 }

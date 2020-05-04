@@ -41,13 +41,22 @@ void	check_plane(t_env *e, t_scene *scene, int *ret)
 void	check_cylinder(t_env *e, t_scene *scene, int *ret)
 {
 	t_cylinder	*cylinder;
-	t_vector		dist;
-	double		m1;
-	double		m2;
 
 	cylinder = (t_cylinder *)scene->object;
-	cylinder->normal = getNormalized(cylinder->normal);
 	if (intersectRayCylinder(e, cylinder))
+	{
+		*ret = 1;
+		ft_get_normal(e, scene);
+		e->object = scene;
+	}
+}
+
+void	check_triangle(t_env *e, t_scene *scene, int *ret)
+{
+	t_triangle	*triangle;
+
+	triangle = (t_triangle *)scene->object;
+	if (intersectRayTriangle(e, triangle))
 	{
 		*ret = 1;
 		ft_get_normal(e, scene);

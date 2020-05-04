@@ -97,3 +97,43 @@ int	intersectRayCylinder(t_env *e, t_cylinder *cylinder)
 	}
 	return (0);
 }
+
+int	intersectRayTriangle(t_env *e, t_triangle *triangle)
+{
+	t_vector	P;
+	t_vector	vec[3];
+	t_vector	v1;
+	t_vector	v2;
+	double		M[3];
+	double		detm;
+	double		detb;
+	double		b[2];
+	double		beta;
+	double		gamma;
+	double		alpha;
+
+	v1 = ft_vector_sub(triangle->B, triangle->A);
+	v2 = ft_vector_sub(triangle->C, triangle->A);
+	triangle->normal = getNormalized(cross_product(&v1, &v2));
+	e->distance = ft_vector_dot(ft_vector_sub(triangle->C, e->ray.start), triangle->normal) / ft_vector_dot(e->ray.dir, triangle->normal);
+	if (e->distance < 0)
+		return (0);
+	P = ft_vector_add(e->ray.start, vectorScale(e->distance, e->ray.dir));
+	vec[0] = ft_vector_sub(triangle->B, triangle->A);
+	vec[1] = ft_vector_sub(triangle->C, triangle->A);
+	vec[2] = ft_vector_sub(P, triangle->A);
+	M[0] = getNorm(vec[0]);
+	M[1] = ft_vector_dot(vec[0], vec[1]);
+	M[2] = getNorm(vec[1]);
+	detm = M[0] * M[2] - M[1] * M[1];
+	b[0] = ft_vector_dot(vec[2], vec[0]);
+	b[1] = ft_vector_dot(vec[2], vec[1]);
+	detb = b[0] * M[2] - b[1] * M[1];
+	beta = detb / detm;
+	detb = M[0] * b[1] - M[1] * b[0];
+	gamma = detb / detm;
+	alpha = 1 - beta - gamma;
+	if ((alpha < 0 || alpha > 1) || (beta < 0 || beta > 1) || (gamma < 0 || gamma > 1))
+		return (0);
+	return (1);
+}

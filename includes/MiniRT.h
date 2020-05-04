@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <errno.h>
+# include <math.h>
 # include <mlx.h>
 # define min(a,b) (((a) < (b)) ? (a) : (b))
 # define max(a,b) (((a) > (b)) ? (a) : (b))
@@ -66,9 +68,11 @@ int			ft_shadow_cast(t_env *e, t_scene *head);
 int			ft_plane_shadow(t_env *e, t_scene *scene);
 int			ft_sphere_shadow(t_env *e, t_scene *scene);
 int			ft_cylinder_shadow(t_env *e, t_scene *scene);
+int			ft_triangle_shadow(t_env *e, t_scene *scene);
 int			intersectRayPlane(t_env *e, t_plane *plane);
 int			intersectRaySphere(t_env *e, t_sphere *sphere);
 int			intersectRayCylinder(t_env *e, t_cylinder *cylinder);
+int			intersectRayTriangle(t_env *e, t_triangle *triangle);
 int			ft_free_error(char **tab);
 int     	ft_check_light(char *str);
 int			ft_check_camera(t_env *e, char **str);
@@ -106,6 +110,7 @@ void		clamp_colors(t_color *clr, int min, int max);
 void		check_plane(t_env *e, t_scene *scene, int *ret);
 void		check_sphere(t_env *e, t_scene *scene, int *ret);
 void		check_cylinder(t_env *e, t_scene *scene, int *ret);
+void		check_triangle(t_env *e, t_scene *scene, int *ret);
 void		ft_add_plane(t_env *e, char *str);
 void		ft_add_sphere(t_env *e, char *str);
 void		ft_add_square(t_env *e, char *str);
@@ -117,7 +122,7 @@ void		ft_light(t_env *e, t_scene *scene, t_scene *head, t_light *lights);
 void		ft_specular(t_scene *scene, t_env *mlx, t_light *light, t_vector tmp);
 void		ft_free_strings(char **scene, char *str);
 void		init_lists(t_env **e);
-void		camera(t_env *mlx, t_vector look_at, float fov, unsigned int xRes, unsigned int yRes);
+void		camera(t_env *e);
 t_mlx		*init(t_env *e);
 t_light		*ft_new_light(char *str);
 t_camera	ft_new_camera(char *str);

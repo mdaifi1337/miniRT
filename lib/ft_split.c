@@ -43,7 +43,6 @@ static char	**allocate(char *tmp, char c, int j)
 
 char		**ft_split(char const *s, char c)
 {
-	char			str[2];
 	char			*tmp;
 	int				i;
 	int				j;
@@ -53,7 +52,6 @@ char		**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	tmp = NULL;
-	str[0] = c;
 	tmp = (char *)s;
 	if (tmp != NULL)
 	{

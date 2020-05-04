@@ -12,7 +12,6 @@
 
 #ifndef FT_VECTORS_H
 # define FT_VECTORS_H
-# include <math.h>
 
 typedef struct	s_vector
 {

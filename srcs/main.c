@@ -33,7 +33,7 @@ void	clamp_colors(t_color *clr, int min, int max)
 void	draw(t_env *e, t_scene *head)
 {
 	e->x = 0;
-	camera(e, e->cam.look_at_point, e->cam.fov, e->WIDTH, e->HEIGHT);
+	camera(e);
 	while (e->x < e->WIDTH)
 	{
 		e->y = e->HEIGHT;
@@ -43,7 +43,8 @@ void	draw(t_env *e, t_scene *head)
 			if (ft_ray_cast(e, head))
 			{
 				ft_light(e, e->object, head, e->light_list);
-				e->mlx->mlx_data[(e->HEIGHT - e->y) * e->WIDTH + e->x] = get_int(e->phong);
+				e->mlx->mlx_data[(e->HEIGHT - e->y)
+				* e->WIDTH + e->x] = get_int(e->phong);
 			}
 			e->y--;
 		}

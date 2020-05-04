@@ -41,3 +41,13 @@ int	ft_cylinder_shadow(t_env *e, t_scene *scene)
 		return (1);
 	return (0);
 }
+
+int	ft_triangle_shadow(t_env *e, t_scene *scene)
+{
+	t_triangle	*triangle;
+
+	triangle = (t_triangle *)scene->object;
+	if (intersectRayTriangle(e, triangle))
+		return (1);
+	return (0);
+}

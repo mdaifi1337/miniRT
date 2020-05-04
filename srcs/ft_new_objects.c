@@ -127,15 +127,15 @@ t_triangle	*ft_new_triangle(char *str)
 	triangle = (t_triangle *)malloc(sizeof(t_triangle));
 	tab = ft_split(str, ' ');
 	temp = ft_split(tab[1], ',');
-	triangle->point_a = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
+	triangle->A = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
 				ft_atof(temp[2]));
 	double_free(temp);
 	temp = ft_split(tab[2], ',');
-	triangle->point_b = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
+	triangle->B = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
 				ft_atof(temp[2]));
 	double_free(temp);
 	temp = ft_split(tab[3], ',');
-	triangle->point_c = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
+	triangle->C = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
 				ft_atof(temp[2]));
 	double_free(temp);
 	temp = ft_split(tab[4], ',');
