@@ -32,6 +32,7 @@ int				ft_toupper(int c);
 int				ft_lstsize(t_list *lst);
 int				ft_atoi(const char *str);
 int 			ft_count_table(char **tab);
+int				ft_check_commas(char **tab);
 int 			ft_is_int(char *str, char *ch);
 int 			ft_is_double(char *str, char *ch);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);

@@ -58,8 +58,10 @@ typedef struct	s_square
 {
 	t_vector	pos;
 	t_vector	normal;
-	double		side;
+	t_vector	up;
+	t_vector	right;
 	t_color		color;
+	double		side;
 } 				t_square;
 
 typedef struct	s_triangle
@@ -67,7 +69,6 @@ typedef struct	s_triangle
 	t_vector	A;
 	t_vector	B;
 	t_vector	C;
-	t_vector	normal;
 	t_color		color;
 
 }				t_triangle;

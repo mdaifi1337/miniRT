@@ -51,3 +51,13 @@ int	ft_triangle_shadow(t_env *e, t_scene *scene)
 		return (1);
 	return (0);
 }
+
+int	ft_square_shadow(t_env *e, t_scene *scene)
+{
+	t_square	*square;
+
+	square = (t_square *)scene->object;
+	if (intersectRaySquare(e, square))
+		return (1);
+	return (0);
+}

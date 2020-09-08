@@ -39,6 +39,7 @@ void	ft_parse(char *file, t_env *e)
 	char			*str;
 	char			**tab;
 	int				i;
+	int				j;
 	t_light			*light;
 
 	str = NULL;
@@ -55,23 +56,26 @@ void	ft_parse(char *file, t_env *e)
 	init_lists(&e);
 	while (tab[i])
 	{
-		if (tab[i][0] == 'R')
+		j = 0;
+		while(tab[i][j] == ' ')
+			j++;
+		if (tab[i][j] == 'R')
 			ft_window_resolution(tab[i], e);
-		if (tab[i][0] == 'A')
+		if (tab[i][j] == 'A')
 			e->ambient = ft_new_ambient(tab[i]);
-		if (tab[i][0] == 'c' && tab[i][1] == ' ')
-			e->cam = ft_new_camera(tab[i]);
-		if (tab[i][0] == 'l')
+		if (tab[i][j] == 'c' && tab[i][j + 1] == ' ')
+			ft_add_cam(&e->cam_list, tab[i]);
+		if (tab[i][j] == 'l')
 			ft_add_light(&e->light_list, tab[i]);
-		if (tab[i][0] == 'p' && tab[i][1] == 'l')
+		if (tab[i][j] == 'p' && tab[i][j + 1] == 'l')
 			ft_add_plane(e, tab[i]);
-		if (tab[i][0] == 's' && tab[i][1] == 'p')
+		if (tab[i][j] == 's' && tab[i][j + 1] == 'p')
 			ft_add_sphere(e, tab[i]);
-		if (tab[i][0] == 's' && tab[i][1] == 'q')
+		if (tab[i][j] == 's' && tab[i][j + 1] == 'q')
 			ft_add_square(e, tab[i]);
-		if (tab[i][0] == 'c' && tab[i][1] == 'y')
+		if (tab[i][j] == 'c' && tab[i][j + 1] == 'y')
 			ft_add_cylinder(e, tab[i]);
-		if (tab[i][0] == 't' && tab[i][1] == 'r')
+		if (tab[i][j] == 't' && tab[i][j + 1] == 'r')
 			ft_add_triangle(e, tab[i]);
 		i++;
 	}
@@ -82,6 +86,7 @@ void	init_lists(t_env **e)
 {
 	(*e)->light_list = NULL;
 	(*e)->scene_head = NULL;
+	(*e)->cam_list = NULL;
 }
 
 void	ft_free_strings(char **scene, char *str)

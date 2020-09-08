@@ -63,3 +63,16 @@ void	check_triangle(t_env *e, t_scene *scene, int *ret)
 		e->object = scene;
 	}
 }
+
+void	check_square(t_env *e, t_scene *scene, int *ret)
+{
+	t_square	*square;
+
+	square = (t_square *)scene->object;
+	if (intersectRaySquare(e, square))
+	{
+		*ret = 1;
+		ft_get_normal(e, scene);
+		e->object = scene;
+	}
+}

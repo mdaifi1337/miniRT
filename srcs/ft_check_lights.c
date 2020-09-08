@@ -30,6 +30,8 @@ int		ft_check_ambient(t_env *e, char **str)
 				return (-1);
 			}
 			tab = ft_split(str[i], ' ');
+			if (ft_check_commas(tab) == -1)
+				return (ft_free_error(tab));
 			if (ft_check_nbr(tab, "Error, Missing or extra Ambient value(s) !..\n", 3) == -1)
 				return (-1);
 			if (ft_check_between(tab[1], "Error, Invalid Ambient intensity...\n", 0, 1) == -1)
@@ -57,6 +59,8 @@ int     ft_check_light(char *str)
 	tab = NULL;
 	temp = NULL;
 	tab = ft_split(str, ' ');
+	if (ft_check_commas(tab) == -1)
+		return (ft_free_error(tab));
 	if (ft_check_nbr(tab, "Error, Missing or extra Light value(s) !..\n", 4) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');

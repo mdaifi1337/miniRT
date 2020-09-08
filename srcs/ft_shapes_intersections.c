@@ -104,36 +104,67 @@ int	intersectRayTriangle(t_env *e, t_triangle *triangle)
 	t_vector	vec[3];
 	t_vector	v1;
 	t_vector	v2;
-	double		M[3];
-	double		detm;
-	double		detb;
-	double		b[2];
-	double		beta;
-	double		gamma;
-	double		alpha;
+	t_vector	O_cross_v1;
+	t_vector	ray_cross_v2;
+	double		det;
+	double		u;
+	double		v;
+	double		new_dist;
 
 	v1 = ft_vector_sub(triangle->B, triangle->A);
 	v2 = ft_vector_sub(triangle->C, triangle->A);
-	triangle->normal = getNormalized(cross_product(&v1, &v2));
-	e->distance = ft_vector_dot(ft_vector_sub(triangle->C, e->ray.start), triangle->normal) / ft_vector_dot(e->ray.dir, triangle->normal);
-	if (e->distance < 0)
+	ray_cross_v2 = cross_product(&e->ray.dir, &v2);
+	det = ft_vector_dot(v1, ray_cross_v2);
+	if (det < 0.0000001 && det > -0.0000001)
 		return (0);
-	P = ft_vector_add(e->ray.start, vectorScale(e->distance, e->ray.dir));
-	vec[0] = ft_vector_sub(triangle->B, triangle->A);
-	vec[1] = ft_vector_sub(triangle->C, triangle->A);
-	vec[2] = ft_vector_sub(P, triangle->A);
-	M[0] = getNorm(vec[0]);
-	M[1] = ft_vector_dot(vec[0], vec[1]);
-	M[2] = getNorm(vec[1]);
-	detm = M[0] * M[2] - M[1] * M[1];
-	b[0] = ft_vector_dot(vec[2], vec[0]);
-	b[1] = ft_vector_dot(vec[2], vec[1]);
-	detb = b[0] * M[2] - b[1] * M[1];
-	beta = detb / detm;
-	detb = M[0] * b[1] - M[1] * b[0];
-	gamma = detb / detm;
-	alpha = 1 - beta - gamma;
-	if ((alpha < 0 || alpha > 1) || (beta < 0 || beta > 1) || (gamma < 0 || gamma > 1))
+	P = ft_vector_sub(e->ray.start, triangle->A);
+	u = (1.0 / det) * ft_vector_dot(P, ray_cross_v2);
+	if (u < 0.0 || u > 1.0)
 		return (0);
-	return (1);
+	O_cross_v1 = cross_product(&P, &v1);
+	v = (1.0 / det) * ft_vector_dot(e->ray.dir, O_cross_v1);
+	if (v < 0.0 || (u + v) > 1.0)
+		return (0);
+	new_dist = (1.0 / det) * ft_vector_dot(v2, O_cross_v1);
+	if (new_dist > 0.0000001 && new_dist < e->distance)
+	{
+		e->distance = new_dist;
+		return (1);
+	}
+	return (0);
+}
+
+int	intersectRaySquare(t_env *e, t_square *square)
+{
+	t_vector	temp;
+	t_vector	inter_point;
+	t_plane		*plane;
+	double		check[2];
+	double		temp_dist;
+
+	temp_dist = e->distance;
+	plane = (t_plane *)malloc(sizeof(t_plane));
+	plane->pos = square->pos;
+	plane->normal = square->normal;
+	if (intersectRayPlane(e, plane))
+	{
+		free(plane);
+		temp = ft_make_vector(0, 1, 0.1);
+		square->right = getNormalized(cross_product(&temp, &square->normal));
+		square->up = getNormalized(cross_product(&square->normal, &square->right));
+		square->right = vectorScale(square->side / 2, square->right);
+		square->up = vectorScale(square->side / 2, square->up);
+		inter_point = ft_vector_sub(ft_vector_add(e->ray.start, vectorScale(e->distance, e->ray.dir)), square->pos);
+		if (ft_vector_dot(square->right, inter_point) <= 0)
+			square->right = vectorScale(-1, square->right);
+		if (ft_vector_dot(square->up, inter_point) <= 0)
+			square->up = vectorScale(-1, square->up);
+		check[0] = acos(ft_vector_dot(square->right, inter_point) / (getNorm(square->right) * getNorm(inter_point)));
+		check[1] = acos(ft_vector_dot(square->up, inter_point) / (getNorm(square->up) * getNorm(inter_point)));
+		if (getNorm(inter_point) * cos(check[0]) < getNorm(square->right) &&
+			getNorm(inter_point) * cos(check[1]) < getNorm(square->up))
+			return (1);
+		e->distance = temp_dist;
+		return (0);
+	}
 }

@@ -26,6 +26,8 @@ int	ft_ray_cast(t_env *e, t_scene *head)
 			check_sphere(e, head, &ret);
 		else if (head->type == Tcylinder)
 			check_cylinder(e, head, &ret);
+		else if (head->type == Tsquare)
+			check_square(e, head, &ret);
 		else if (head->type == Ttriangle)
 			check_triangle(e, head, &ret);
 		head = head->next;
@@ -46,6 +48,9 @@ int	ft_shadow_cast(t_env *e, t_scene *head)
 				return (1);
 		if (head->type == Tcylinder)
 			if (ft_cylinder_shadow(e, head))
+				return (1);
+		if (head->type == Tsquare)
+			if (ft_square_shadow(e, head))
 				return (1);
 		if (head->type == Ttriangle)
 			if (ft_triangle_shadow(e, head))

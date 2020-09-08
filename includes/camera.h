@@ -16,19 +16,20 @@
 
 typedef struct	s_camera
 {
-	t_vector	pos;
-	t_vector	right;
-	t_vector	Up;
-	t_vector	BottomLeftPoint;
-	t_vector	x_inc;
-	t_vector	y_inc;
-	t_vector	default_up;
-	t_vector	look_at_point;
-	double		fov;
-	double		HalfWidth;
-	double		aspectRatio;
-	double		HalfHeight;
-	int			found;
+	t_vector		pos;
+	t_vector		right;
+	t_vector		Up;
+	t_vector		BottomLeftPoint;
+	t_vector		x_inc;
+	t_vector		y_inc;
+	t_vector		default_up;
+	t_vector		look_at_point;
+	double			fov;
+	double			HalfWidth;
+	double			aspectRatio;
+	double			HalfHeight;
+	int				found;
+	struct s_camera	*next;
 }				t_camera;
 
 #endif

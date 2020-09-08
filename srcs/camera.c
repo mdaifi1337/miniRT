@@ -41,23 +41,25 @@ void	ft_make_ray(t_env *e, int x, int y)
 	e->ray.dir = getNormalized(ft_vector_sub(viewPlanePoint, e->cam.pos));
 }
 
-t_camera	ft_new_camera(char *str)
+t_camera	*ft_new_camera(char *str)
 {
 	char	**tab;
 	char	**tmp;
-	t_camera	camera;
+	t_camera	*camera;
 
+	camera = (t_camera *)malloc(sizeof(t_camera));
 	tab = ft_split(str, ' ');
 	tmp = ft_split(tab[1], ',');
-	camera.pos = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
+	camera->pos = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
 	ft_atof(tmp[2]));
 	double_free(tmp);
 	tmp = ft_split(tab[2], ',');
-	camera.look_at_point = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
+	camera->look_at_point = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
 	ft_atof(tmp[2]));
 	double_free(tmp);
-	camera.fov = ft_radians(ft_atof(tab[3]));
+	camera->fov = ft_radians(ft_atof(tab[3]));
 	double_free(tab);
+	camera->default_up = (t_vector){0, 1, 0};
 	return (camera);
 }
 
@@ -74,6 +76,8 @@ static int	ft_it_cam_array(t_env *e, char **str)
 		{
 			e->cam.found++;
 			tab = ft_split(str[i], ' ');
+			if (ft_check_commas(tab) == -1)
+				return (ft_free_error(tab));
 			if (ft_check_nbr(tab, "Error, Invalid Camera value(s)..\n", 4) == -1)
 				return (-1);
 			temp = ft_split(tab[1], ',');
@@ -103,4 +107,23 @@ int		ft_check_camera(t_env *e, char **str)
 		return (-1);
 	}
 	return (ret);
+}
+
+void	ft_add_cam(t_camera **list, char *str)
+{
+	t_camera	*it_list;
+	t_camera	*new;
+	
+	new = ft_new_camera(str);
+	if (*list == NULL)
+	{
+		(*list) = new;
+		it_list = (*list);
+	}
+	else
+	{
+		it_list->next = new;
+		it_list = new;
+	}
+	it_list->next = (*list);
 }

@@ -26,13 +26,19 @@ t_Alight		ft_ambient(t_scene *scene, t_env *e)
 void	ft_specular(t_scene *scene, t_env *e, t_light *list, t_vector tmp)
 {
 	int			N;
+	double		r;
+	double		term;
+	t_vector	reflection;
 	t_vector	R;
 
 	N = 60;
-	R = ft_vector_sub(list->dist_to_light, vectorScale(2 * ft_vector_dot(list->dist_to_light, scene->normal), scene->normal));
-	e->specular.red += list->intensity * (list->color.red / 255) * pow(max(0.0f, ft_vector_dot(tmp, R)), N);
-	e->specular.green += list->intensity * (list->color.green / 255) * pow(max(0.0f, ft_vector_dot(tmp, R)), N);
-	e->specular.blue += list->intensity * (list->color.blue / 255) * pow(max(0.0f, ft_vector_dot(tmp, R)), N);
+	r = 2.0 * ft_vector_dot(list->dist_to_light, scene->normal);
+	reflection = vectorScale(r, getNormalized(scene->normal));
+	R = getNormalized(ft_vector_sub(list->dist_to_light, reflection));
+	term = pow(max(0.0f, ft_vector_dot(tmp, R)), N);
+	e->specular.red += list->intensity * (list->color.red / 255) * term;
+	e->specular.green += list->intensity * (list->color.green / 255) * term;
+	e->specular.blue += list->intensity * (list->color.blue / 255) * term;
 }
 
 void	ft_diffuse(t_scene *scene, t_env *e, t_light *light)

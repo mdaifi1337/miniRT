@@ -20,7 +20,7 @@ int	ft_check_vector(char **tab, char *str)
 	return (1);
 }
 
-int	ft_check_between(char *tab, char *str, int min, int max)
+int	ft_check_between(char *tab, char *str, double min, double max)
 {
 	if (ft_is_double(tab, str) == -1 ||
 		ft_is_between(ft_atof(tab), min, max, str) == -1)
@@ -49,7 +49,7 @@ int	ft_check_normal(char **tab, char *str)
 int	ft_check_int_between(char *tab, char *str, int min, int max)
 {
 	if (ft_is_int(tab, str) == -1 ||
-		ft_is_between(ft_atof(tab), 0, 180, str) == -1)
+		ft_is_between(ft_atof(tab), min, max, str) == -1)
 		return (-1);
 	return (1);
 }

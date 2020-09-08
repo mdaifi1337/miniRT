@@ -33,6 +33,7 @@ void	clamp_colors(t_color *clr, int min, int max)
 void	draw(t_env *e, t_scene *head)
 {
 	e->x = 0;
+	e->cam = *(e->cam_list);
 	camera(e);
 	while (e->x < e->WIDTH)
 	{
@@ -54,23 +55,8 @@ void	draw(t_env *e, t_scene *head)
 
 int key(int khook, t_env *e)
 {	
-	if (khook == 53)
+	if (khook == XK_Escape)
 		exit(0);
-	if (khook == 88)
-	{
-		if (e->rot_x == 360)
-			e->rot_x = 0;
-		e->cam.pos.x += e->R * cos(e->rot_x);
-		// e->cam.pos.z += e->R * sin(e->rot_x);
-		e->rot_x++;
-		printf("%f\n", e->rot_x);
-		mlx_clear_window(e->mlx->mlx_ptr, e->mlx->mlx_win);
-		mlx_destroy_image(e->mlx->mlx_ptr, e->mlx->mlx_img);
-		e->mlx->mlx_img = mlx_new_image(e->mlx->mlx_ptr, e->WIDTH, e->HEIGHT);
-		e->mlx->mlx_data = (int *)mlx_get_data_addr(e->mlx->mlx_img, &e->mlx->bpp, &e->mlx->size_l, &e->mlx->endian);
-		draw(e, e->scene_head);
-		mlx_put_image_to_window(e->mlx->mlx_ptr, e->mlx->mlx_win, e->mlx->mlx_img, 0, 0);
-	}
 	// if (khook == 84)
 	// {
 	// 	e->cam.pos.z += 0.01;
@@ -178,12 +164,9 @@ int main()
 	// // e->ambient.color.blue = 255;
 	// // e->ambient.intensity = 0.2;
 	// // e->cam.fov = (90 * PI) / 180;
-	e.cam.default_up = (t_vector){0, 1, 0};
-	e.R = getNorm(ft_vector_sub(e.cam.pos, e.look_at_point));
-	// // printf("%d | %d\n", e->mlx->x, e->mlx->y);
 	draw(&e, e.scene_head);
 	mlx_hook(e.mlx->mlx_win, 17, 0, &close_win, &e);
-	mlx_hook(e.mlx->mlx_win, 2, 0, key, &e);
+	mlx_hook(e.mlx->mlx_win, 2, KeyPressMask, key, &e);
 	mlx_hook(e.mlx->mlx_win, 4, 0, mouse_press, &e);
 	mlx_put_image_to_window(e.mlx->mlx_ptr, e.mlx->mlx_win, e.mlx->mlx_img, 0, 0);
 	mlx_loop(e.mlx->mlx_ptr);

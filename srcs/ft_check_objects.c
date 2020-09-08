@@ -20,6 +20,8 @@ int	ft_check_plane(char *str)
 	tab = NULL;
 	temp = NULL;
 	tab = ft_split(str, ' ');
+	if (ft_check_commas(tab) == -1)
+		return (ft_free_error(tab));
 	if (ft_check_nbr(tab, "Error, Invalid Plane value(s)..\n", 4) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
@@ -46,6 +48,8 @@ int	ft_check_sphere(char *str)
 	tab = NULL;
 	temp = NULL;
 	tab = ft_split(str, ' ');
+	if (ft_check_commas(tab) == -1)
+		return (ft_free_error(tab));
 	if (ft_check_nbr(tab, "Error, Invalid Sphere value(s)..\n", 4) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
@@ -70,6 +74,8 @@ int	ft_check_square(char *str)
 	tab = NULL;
 	temp = NULL;
 	tab = ft_split(str, ' ');
+	if (ft_check_commas(tab) == -1)
+		return (ft_free_error(tab));
 	if (ft_check_nbr(tab, "Error, Missing or extra Square value(s) !..\n", 5) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
@@ -80,7 +86,7 @@ int	ft_check_square(char *str)
 	if (ft_check_normal(temp, "Error, Invalid Square normal..\n") == -1)
 		return (ft_free_error(tab));
 	double_free(temp);
-	if (ft_check_between(tab[2], "Error, Invalid Square side..\n", 0, INT_MAX) == -1)
+	if (ft_check_between(tab[3], "Error, Invalid Square side..\n", 0, INT_MAX) == -1)
 		return (ft_free_error(tab));
 	temp = ft_split(tab[4], ',');
 	if (ft_check_color(temp, "Error, Invalid Square color value(s)..\n") == -1)
@@ -98,6 +104,8 @@ int	ft_check_cylinder(char *str)
 	tab = NULL;
 	temp = NULL;
 	tab = ft_split(str, ' ');
+	if (ft_check_commas(tab) == -1)
+		return (ft_free_error(tab));
 	if (ft_check_nbr(tab, "Error, Invalid Cylinder value(s) !..\n", 6) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
@@ -128,6 +136,8 @@ int	ft_check_triangle(char *str)
 	tab = NULL;
 	temp = NULL;
 	tab = ft_split(str, ' ');
+	if (ft_check_commas(tab) == -1)
+		return (ft_free_error(tab));
 	if (ft_check_nbr(tab, "Error, Invalid Triangle value(s) !..\n", 5) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');

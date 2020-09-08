@@ -91,9 +91,7 @@ void	ft_light(t_env *e, t_scene *object, t_scene *head, t_light *lights)
 			ft_diffuse(object, e, light);
 			ft_specular(object, e, light, tmp);
 		}
-		final_color(e, &ambient);
 		light = light->next;
 	}
-	if (light == NULL)
-		final_color(e, &ambient);
+	final_color(e, &ambient);
 }

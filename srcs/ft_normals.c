@@ -51,6 +51,8 @@ void	square_normal(t_scene *scene)
 
 	square = (t_square *)scene->object;
 	scene->normal = square->normal;
+	if (ft_vector_dot(scene->intersect_point, square->normal) > 0)
+		scene->normal = vectorScale(-1, square->normal);
 }
 
 void	triangle_normal(t_scene *scene)
@@ -61,9 +63,10 @@ void	triangle_normal(t_scene *scene)
 
 	triangle = (t_triangle *)scene->object;
 	v1 = ft_vector_sub(triangle->B, triangle->A);
-	v2 =  ft_vector_sub(triangle->C, triangle->A);
-	scene->normal = cross_product(&v1, &v2);
-	scene->normal = getNormalized(scene->normal);
+	v2 = ft_vector_sub(triangle->C, triangle->A);
+	scene->normal = getNormalized(cross_product(&v2, &v1));
+	if (ft_vector_dot(scene->intersect_point, scene->normal) > 0)
+		scene->normal = vectorScale(-1, scene->normal);
 }
 
 void		ft_get_normal(t_env *e, t_scene *head)
