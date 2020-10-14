@@ -55,7 +55,7 @@ void	draw(t_env *e, t_scene *head)
 
 int key(int khook, t_env *e)
 {	
-	if (khook == XK_Escape)
+	if (khook == 53)
 		exit(0);
 	// if (khook == 84)
 	// {

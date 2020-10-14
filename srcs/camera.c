@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:40:37 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/13 18:38:41 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/14 16:53:49 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	ft_it_cam_array(t_env *e, char **str)
 	char	**tab;
 	char	**temp;
 	int		i;
+	int		res;
 
 	i = -1;
 	while (str[++i])
@@ -93,6 +94,8 @@ static int	ft_it_cam_array(t_env *e, char **str)
 			double_free(tab);
 		}
 	}
+	res = i = 0 ? -1 : 1;
+	return (res);
 }
 
 int		ft_check_camera(t_env *e, char **str)

@@ -5,23 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/saeiko/Desktop/miniRT/miniRT",
+            "program": "/Users/mdaifi/Desktop/miniRT2.0/miniRT",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "/home/saeiko/Desktop/miniRT",
+            "cwd": "/Users/mdaifi/Desktop/miniRT2.0/",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
+            "MIMode": "lldb"
         }
     ]
 }

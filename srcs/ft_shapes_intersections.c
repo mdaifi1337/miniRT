@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:26:17 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/10 18:16:06 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/14 17:06:59 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,4 +167,5 @@ int	intersectRaySquare(t_env *e, t_square *square)
 		e->distance = temp_dist;
 		return (0);
 	}
+	return (0);
 }

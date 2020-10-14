@@ -6,13 +6,12 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:21:36 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/13 19:51:56 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/14 16:31:11 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
-# include <X11/keysymdef.h>
 # include "camera.h"
 # include "shapes.h"
 # include "ft_vectors.h"

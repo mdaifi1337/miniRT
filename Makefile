@@ -1,7 +1,6 @@
 NAME = miniRT
 FLAGS = -Wall -Werror -Wextra
-# LIBS= -g -lm -lmlx -framework OpenGl -framework AppKit
-LIBS = -lm -L/usr/X11/lib /usr/X11/lib/libmlx.a -lXext -lX11 lib/libft.a
+LIBS= -g -lm -lmlx -framework OpenGl -framework AppKit
 SRCS = srcs/camera.c srcs/ft_vector_operations.c srcs/ft_vectors.c \
 	   srcs/ft_lights.c srcs/ft_shapes_intersections.c srcs/ft_new_objects.c \
 	   srcs/ft_add_objects.c srcs/ft_tools.c srcs/parser.c srcs/init_win.c \
@@ -10,7 +9,7 @@ SRCS = srcs/camera.c srcs/ft_vector_operations.c srcs/ft_vectors.c \
 	   srcs/ft_objects_shadow.c srcs/ft_check_values.c srcs/ft_check_lights.c \
 	   srcs//ft_check_objects.c srcs/ft_check_functions.c srcs/main.c
 OBJ = $(SRCS:.c=.o)
-LIBFT = -L/lib/
+LIBFT = lib/libft.a
 HEAD = -I includes
 all: $(NAME)
 
@@ -19,7 +18,7 @@ lib_rule:
 	make -C ./lib
 
 $(NAME): lib_rule $(OBJ)
-		gcc $(OBJ) -o $(NAME) $(LIBS)
+		gcc $(LIBFT) $(OBJ) $(FLAGS) -o $(NAME) $(LIBS)
 
 %.o: %.c
 		gcc -g -c $< -o $@ 
