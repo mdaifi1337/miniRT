@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 17:21:31 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/13 19:51:52 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/21 18:36:04 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	ft_parse(char *file, t_env *e)
 			ft_add_square(e, tab[i]);
 		if (tab[i][j] == 'c' && tab[i][j + 1] == 'y')
 			ft_add_cylinder(e, tab[i]);
-		if (tab[i][j] == 't' && tab[i][j + 1] == 'r')
+		if (tab[i][j] == 't' && tab[i][j + 1] == 'r' && tab[i][j + 2] == ' ')
 			ft_add_triangle(e, tab[i]);
-		i++;
+		i++; 
 	}
 	ft_free_strings(tab, str);
 }

@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 17:18:07 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/12 16:03:48 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/21 19:48:17 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void		double_free(char **str)
 	str = NULL;
 }
 
-double		ft_radians(int fov)
+double		ft_radians(int angle)
 {
-	return ((fov * PI) / 180);
+	return ((angle * PI) / 180);
 }
 
 int	ft_free_error(char **tab)

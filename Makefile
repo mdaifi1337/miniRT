@@ -7,7 +7,8 @@ SRCS = srcs/camera.c srcs/ft_vector_operations.c srcs/ft_vectors.c \
 	   srcs/ft_color.c srcs/ft_init_vars.c srcs/ft_casting.c \
 	   srcs/ft_check_intersection.c srcs/ft_normals.c srcs/ft_check_file.c \
 	   srcs/ft_objects_shadow.c srcs/ft_check_values.c srcs/ft_check_lights.c \
-	   srcs//ft_check_objects.c srcs/ft_check_functions.c srcs/main.c
+	   srcs/ft_check_objects.c srcs/ft_check_functions.c srcs/main.c \
+	   srcs/ft_translate.c srcs/ft_rotations.c
 OBJ = $(SRCS:.c=.o)
 LIBFT = lib/libft.a
 HEAD = -I includes

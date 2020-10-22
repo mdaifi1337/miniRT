@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:41:07 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/11 15:47:01 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/22 19:38:54 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ typedef struct	s_camera
 	t_vector		y_inc;
 	t_vector		default_up;
 	t_vector		look_at_point;
+	t_vector		trans;
+	t_vector		rot;
+	int				found;
 	double			fov;
 	double			HalfWidth;
 	double			aspectRatio;
 	double			HalfHeight;
-	int				found;
 	struct s_camera	*next;
+	struct s_camera	*prev;
 }				t_camera;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 20:38:18 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/12 17:13:35 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/22 18:31:40 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_plane(char *str)
 	tab = ft_split(str, ' ');
 	if (ft_check_commas(tab) == -1)
 		return (ft_free_error(tab));
-	if (ft_check_nbr(tab, "Error, Invalid Plane value(s)..\n", 4) == -1)
+	if (ft_check_nbr(tab, "Error, Invalid Plane value(s)..\n", 6) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
 	if (ft_check_vector(temp, "Error, Invalid Plane position..\n") == -1)
@@ -36,6 +36,10 @@ int	ft_check_plane(char *str)
 	if (ft_check_color(temp, "Error, Invalid Plane color value(s)..\n") == -1)
 		return (ft_free_error(tab));
 	double_free(temp);
+	if (ft_check_trans(tab[4]) == -1)
+		return (ft_free_error(tab));
+	if (ft_check_rot(tab[5]) == -1)
+		return (ft_free_error(tab));
 	double_free(tab);
 	return (1);
 }
@@ -50,7 +54,7 @@ int	ft_check_sphere(char *str)
 	tab = ft_split(str, ' ');
 	if (ft_check_commas(tab) == -1)
 		return (ft_free_error(tab));
-	if (ft_check_nbr(tab, "Error, Invalid Sphere value(s)..\n", 4) == -1)
+	if (ft_check_nbr(tab, "Error, Invalid Sphere value(s)..\n", 5) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
 	if (ft_check_vector(temp, "Error, Invalid Sphere position..\n") == -1)
@@ -62,6 +66,8 @@ int	ft_check_sphere(char *str)
 	if (ft_check_color(temp, "Error, Invalid Sphere color value(s)..\n") == -1)
 		return (ft_free_error(tab));
 	double_free(temp);
+	if (ft_check_trans(tab[4]) == -1)
+		return (ft_free_error(tab));
 	double_free(tab);
 	return (1);
 }
@@ -76,7 +82,7 @@ int	ft_check_square(char *str)
 	tab = ft_split(str, ' ');
 	if (ft_check_commas(tab) == -1)
 		return (ft_free_error(tab));
-	if (ft_check_nbr(tab, "Error, Missing or extra Square value(s) !..\n", 5) == -1)
+	if (ft_check_nbr(tab, "Error, Missing or extra Square value(s) !..\n", 7) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
 	if (ft_check_vector(temp, "Error, Invalid Square position..\n") == -1)
@@ -92,6 +98,10 @@ int	ft_check_square(char *str)
 	if (ft_check_color(temp, "Error, Invalid Square color value(s)..\n") == -1)
 		return (ft_free_error(tab));
 	double_free(temp);
+	if (ft_check_trans(tab[5]) == -1)
+		return (ft_free_error(tab));
+	if (ft_check_rot(tab[6]) == -1)
+		return (ft_free_error(tab));
 	double_free(tab);
 	return (1);
 }
@@ -106,7 +116,7 @@ int	ft_check_cylinder(char *str)
 	tab = ft_split(str, ' ');
 	if (ft_check_commas(tab) == -1)
 		return (ft_free_error(tab));
-	if (ft_check_nbr(tab, "Error, Invalid Cylinder value(s) !..\n", 6) == -1)
+	if (ft_check_nbr(tab, "Error, Invalid Cylinder value(s) !..\n", 8) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
 	if (ft_check_vector(temp, "Error, Invalid Cylinder position..\n") == -1)
@@ -124,6 +134,10 @@ int	ft_check_cylinder(char *str)
 	if (ft_check_color(temp, "Error, Invalid Cylinder color value(s)..\n") == -1)
 		return (ft_free_error(tab));
 	double_free(temp);
+	if (ft_check_trans(tab[6]) == -1)
+		return (ft_free_error(tab));
+	if (ft_check_rot(tab[7]) == -1)
+		return (ft_free_error(tab));
 	double_free(tab);
 	return (1);
 }

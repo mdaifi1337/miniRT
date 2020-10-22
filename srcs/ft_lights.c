@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:45:02 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/13 18:33:45 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/22 18:17:03 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ t_light		*ft_new_light(char *str)
 	temp = NULL;
 	light = (t_light *)malloc(sizeof(t_light));
 	tab = ft_split(str, ' ');
-	temp = ft_split(tab[1], ',');
-	light->pos = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
+	temp = ft_split(tab[4], ',');
+	light->trans = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
 				ft_atof(temp[2]));
+	double_free(temp);
+	temp = ft_split(tab[1], ',');
+	light->pos = ft_make_vector(ft_atof(temp[0]) + light->trans.x,
+				ft_atof(temp[1]) + light->trans.y,
+				ft_atof(temp[2]) + light->trans.z);
 	double_free(temp);
 	light->intensity = ft_atof(tab[2]);
 	temp = ft_split(tab[3], ',');

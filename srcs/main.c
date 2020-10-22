@@ -57,66 +57,6 @@ int key(int khook, t_env *e)
 {	
 	if (khook == 53)
 		exit(0);
-	// if (khook == 84)
-	// {
-	// 	e->cam.pos.z += 0.01;
-	// 	mlx_clear_window(e->mlx->mlx_ptr, e->mlx->mlx_win);
-	// 	mlx_destroy_image(e->mlx->mlx_ptr, e->mlx->mlx_img);
-	// 	e->mlx->mlx_img = mlx_new_image(e->mlx->mlx_ptr, e->WIDTH, e->HEIGHT);
-	// 	e->mlx->mlx_data = (int *)mlx_get_data_addr(e->mlx->mlx_img, &e->mlx->bpp, &e->mlx->size_l, &e->mlx->endian);
-	// 	draw(e);
-	// 	mlx_put_image_to_window(e->mlx->mlx_ptr, e->mlx->mlx_win, e->mlx->mlx_img, 0, 0);
-	// }
-	// if (khook == 91)
-	// {
-	// 	e->cam.pos.z -= 0.01;
-	// 	mlx_clear_window(e->mlx->mlx_ptr, e->mlx->mlx_win);
-	// 	mlx_destroy_image(e->mlx->mlx_ptr, e->mlx->mlx_img);
-	// 	e->mlx->mlx_img = mlx_new_image(e->mlx->mlx_ptr, e->WIDTH, e->HEIGHT);
-	// 	e->mlx->mlx_data = (int *)mlx_get_data_addr(e->mlx->mlx_img, &e->mlx->bpp, &e->mlx->size_l, &e->mlx->endian);
-	// 	draw(e);
-	// 	mlx_put_image_to_window(e->mlx->mlx_ptr, e->mlx->mlx_win, e->mlx->mlx_img, 0, 0);
-	// }
-	// if (khook == 124)
-	// {
-	// 	e->cam.pos.x -= 0.01;
-	// 	mlx_clear_window(e->mlx->mlx_ptr, e->mlx->mlx_win);
-	// 	mlx_destroy_image(e->mlx->mlx_ptr, e->mlx->mlx_img);
-	// 	e->mlx->mlx_img = mlx_new_image(e->mlx->mlx_ptr, e->WIDTH, e->HEIGHT);
-	// 	e->mlx->mlx_data = (int *)mlx_get_data_addr(e->mlx->mlx_img, &e->mlx->bpp, &e->mlx->size_l, &e->mlx->endian);
-	// 	draw(e);
-	// 	mlx_put_image_to_window(e->mlx->mlx_ptr, e->mlx->mlx_win, e->mlx->mlx_img, 0, 0);
-	// }
-	// if (khook == 123)
-	// {
-	// 	e->cam.pos.x += 0.01;
-	// 	mlx_clear_window(e->mlx->mlx_ptr, e->mlx->mlx_win);
-	// 	mlx_destroy_image(e->mlx->mlx_ptr, e->mlx->mlx_img);
-	// 	e->mlx->mlx_img = mlx_new_image(e->mlx->mlx_ptr, e->WIDTH, e->HEIGHT);
-	// 	e->mlx->mlx_data = (int *)mlx_get_data_addr(e->mlx->mlx_img, &e->mlx->bpp, &e->mlx->size_l, &e->mlx->endian);
-	// 	draw(e);
-	// 	mlx_put_image_to_window(e->mlx->mlx_ptr, e->mlx->mlx_win, e->mlx->mlx_img, 0, 0);
-	// }
-	// if (khook == 125)
-	// {
-	// 	e->cam.pos.y -= 0.01;
-	// 	mlx_clear_window(e->mlx->mlx_ptr, e->mlx->mlx_win);
-	// 	mlx_destroy_image(e->mlx->mlx_ptr, e->mlx->mlx_img);
-	// 	e->mlx->mlx_img = mlx_new_image(e->mlx->mlx_ptr, e->WIDTH, e->HEIGHT);
-	// 	e->mlx->mlx_data = (int *)mlx_get_data_addr(e->mlx->mlx_img, &e->mlx->bpp, &e->mlx->size_l, &e->mlx->endian);
-	// 	draw(e);
-	// 	mlx_put_image_to_window(e->mlx->mlx_ptr, e->mlx->mlx_win, e->mlx->mlx_img, 0, 0);
-	// }
-	// if (khook == 126)
-	// {
-	// 	e->cam.pos.y += 0.01;
-	// 	mlx_clear_window(e->mlx->mlx_ptr, e->mlx->mlx_win);
-	// 	mlx_destroy_image(e->mlx->mlx_ptr, e->mlx->mlx_img);
-	// 	e->mlx->mlx_img = mlx_new_image(e->mlx->mlx_ptr, e->WIDTH, e->HEIGHT);
-	// 	e->mlx->mlx_data = (int *)mlx_get_data_addr(e->mlx->mlx_img, &e->mlx->bpp, &e->mlx->size_l, &e->mlx->endian);
-	// 	draw(e);
-	// 	mlx_put_image_to_window(e->mlx->mlx_ptr, e->mlx->mlx_win, e->mlx->mlx_img, 0, 0);
-	// }
 	return (0);
 }
 
@@ -144,7 +84,6 @@ int main()
 	init_vars(&e);
 	ft_parse("test.rt", &e);
 	e.mlx = init(&e);
-	e.rot_x = 0;
 	// // e->cam.pos = (t_vector){0, 0, 0};
 	// // e->sphere.pos = (t_vector){0, 0, 30};
 	// // e->sphere.color.red = 255;

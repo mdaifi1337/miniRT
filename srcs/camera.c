@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:40:37 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/14 16:53:49 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/22 19:39:52 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,36 @@ void	ft_make_ray(t_env *e, int x, int y)
 
 t_camera	*ft_new_camera(char *str)
 {
-	char	**tab;
-	char	**tmp;
-	t_camera	*camera;
+	char		**tab;
+	char		**tmp;
+	t_camera	*cam;
 
-	camera = (t_camera *)malloc(sizeof(t_camera));
+	cam = (t_camera *)malloc(sizeof(t_camera));
 	tab = ft_split(str, ' ');
+	tmp = ft_split(tab[4], ',');
+	cam->trans = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
+				ft_atof(tmp[2]));
+	double_free(tmp);
+	tmp = ft_split(tab[5], ',');
+	cam->rot = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
+				ft_atof(tmp[2]));
+	double_free(tmp);
 	tmp = ft_split(tab[1], ',');
-	camera->pos = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
-	ft_atof(tmp[2]));
+	cam->pos = ft_make_vector(ft_atof(tmp[0]) + cam->trans.x,
+				ft_atof(tmp[1]) + cam->trans.y,
+				ft_atof(tmp[2]) + cam->trans.z);
 	double_free(tmp);
 	tmp = ft_split(tab[2], ',');
-	camera->look_at_point = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
-	ft_atof(tmp[2]));
+	cam->look_at_point = ft_make_vector(ft_atof(tmp[0]), ft_atof(tmp[1]),
+				ft_atof(tmp[2]));
+	cam->look_at_point = ft_rot(cam->look_at_point, ft_radians(cam->rot.x),
+				ft_radians(cam->rot.y),
+				ft_radians(cam->rot.z));
 	double_free(tmp);
-	camera->fov = ft_radians(ft_atof(tab[3]));
+	cam->fov = ft_radians(ft_atof(tab[3]));
 	double_free(tab);
-	camera->default_up = (t_vector){0, 1, 0};
-	return (camera);
+	cam->default_up = (t_vector){0, 1, 0};
+	return (cam);
 }
 
 static int	ft_it_cam_array(t_env *e, char **str)
@@ -79,7 +91,7 @@ static int	ft_it_cam_array(t_env *e, char **str)
 			tab = ft_split(str[i], ' ');
 			if (ft_check_commas(tab) == -1)
 				return (ft_free_error(tab));
-			if (ft_check_nbr(tab, "Error, Invalid Camera value(s)..\n", 4) == -1)
+			if (ft_check_nbr(tab, "Error, Invalid Camera value(s)..\n", 6) == -1)
 				return (-1);
 			temp = ft_split(tab[1], ',');
 			if (ft_check_vector(temp, "Error, Invalid Camera position..\n") == -1)
@@ -90,6 +102,10 @@ static int	ft_it_cam_array(t_env *e, char **str)
 				return (ft_free_error(tab));
 			double_free(temp);
 			if (ft_check_int_between(tab[3], "Error, Invalid FOV..\n", 0, 180) == -1)
+				return (ft_free_error(tab));
+			if (ft_check_trans(tab[4]) == -1)
+				return (ft_free_error(tab));
+			if (ft_check_rot(tab[5]) == -1)
 				return (ft_free_error(tab));
 			double_free(tab);
 		}

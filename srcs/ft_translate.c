@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_light.h                                         :+:      :+:    :+:   */
+/*   ft_translate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 14:11:54 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/22 18:14:09 by mdaifi           ###   ########.fr       */
+/*   Created: 2020/10/18 11:41:24 by mdaifi            #+#    #+#             */
+/*   Updated: 2020/10/21 18:24:14 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LIGHT_H
-# define FT_LIGHT_H
-# include "ft_vectors.h"
+#include "../includes/MiniRT.h"
 
-typedef struct	s_light
+int		ft_check_trans(char *str)
 {
-	t_vector		dist_to_light;
-	t_vector		pos;
-	t_vector		trans;
-	t_color			color;
-	double			intensity;
-	struct s_light	*next;
-}				t_light;
+	char    **tmp;
 
-typedef struct	s_Alight
-{
-	int			found;
-	double		intensity;
-	t_color		color;
-}				t_Alight;
-
-#endif
+	tmp = NULL;
+	tmp = ft_split(str, ',');
+	if (ft_check_vector(tmp, "Error, Invalid translation value(s)..\n") == -1)
+		return (-1); // re-check for leaks (ft_free_error(tmp))
+	double_free(tmp);
+	return (1);
+}

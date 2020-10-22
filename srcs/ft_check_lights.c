@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 20:14:13 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/12 16:57:25 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/22 18:30:42 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int     ft_check_light(char *str)
 	tab = ft_split(str, ' ');
 	if (ft_check_commas(tab) == -1)
 		return (ft_free_error(tab));
-	if (ft_check_nbr(tab, "Error, Missing or extra Light value(s) !..\n", 4) == -1)
+	if (ft_check_nbr(tab, "Error, Missing or extra Light value(s) !..\n", 5) == -1)
         return (-1);
 	temp = ft_split(tab[1], ',');
 	if (ft_check_vector(temp, "Error, Invalid Light position...\n") == -1)
@@ -73,6 +73,8 @@ int     ft_check_light(char *str)
 	if (ft_check_color(temp, "Error, Invalid Light color value(s)...\n") == -1)
 		return (ft_free_error(tab));
 	double_free(temp);
+	if (ft_check_trans(tab[4]) == -1)
+		return (ft_free_error(tab));
 	double_free(tab);
 	return (1);
 }

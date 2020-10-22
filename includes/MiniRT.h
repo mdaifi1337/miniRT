@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:21:36 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/14 16:31:11 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/22 19:42:09 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct	s_env
 	int				WIDTH;
 	int				HEIGHT;
 	int				resolution;
+	int				trs_found;
+	int				rot_found;
 	double			a;
 	double			b;
 	double			c;
@@ -62,8 +64,6 @@ typedef struct	s_env
 	double			discr;
 	double			sqrtdiscr;
 	double			distance;
-	double			rot_x;
-	double			R;
 }				t_env;
 
 int			ft_ray_cast(t_env *e, t_scene *head);
@@ -80,6 +80,8 @@ int			intersectRayCylinder(t_env *e, t_cylinder *cylinder);
 int			intersectRayTriangle(t_env *e, t_triangle *triangle);
 int			ft_free_error(char **tab);
 int     	ft_check_light(char *str);
+int			ft_check_trans(char *str);
+int			ft_check_rot(char *str);
 int			ft_check_camera(t_env *e, char **str);
 int			ft_check_plane(char *str);
 int			ft_check_sphere(char *str);
@@ -98,6 +100,7 @@ int			ft_check_int_between(char *tab, char *str, int min, int max);
 int			ft_check_between(char *tab, char *str, double min, double max);
 int   		ft_check_nbr(char **tab, char *str, int nbr);
 int	    	ft_check_tab_between(char **tab, int min, int max, char *str);
+int	    	ft_translate(t_env *e, char *str, char **tab, int *i);
 double		ft_radians(int fov);
 double		getNorm(t_vector res);
 double		ft_atof(const char *str);
@@ -142,10 +145,11 @@ t_vector	ft_vector_add(t_vector v1, t_vector v2);
 t_vector	ft_vector_sub(t_vector v1, t_vector v2);
 t_vector	cross_product(t_vector *v1, t_vector *v2);
 t_vector	ft_make_vector(double x, double y, double z);
-t_plane		*ft_new_plane(char *str);
-t_sphere	*ft_new_sphere(char *str);
-t_square	*ft_new_square(char *str);
-t_cylinder	*ft_new_cylinder(char *str);
+t_vector	ft_rot(t_vector v, double alpha, double beta, double gamma);
+t_plane		*ft_new_plane(t_env *e, char *str);
+t_sphere	*ft_new_sphere(t_env *e, char *str);
+t_square	*ft_new_square(t_env *e, char *str);
+t_cylinder	*ft_new_cylinder(t_env *e, char *str);
 t_triangle	*ft_new_triangle(char *str);
 
 #endif

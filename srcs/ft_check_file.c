@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 15:13:40 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/12 15:30:36 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/21 17:44:49 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	ft_check_spaces(char *tab) // not sure if i should check this, but i'
 	i = 0;
 	while (tab[i])
 	{
-		if (tab[i] == '\t' || tab[i] == '\r' || tab[i] == '\f' || tab[i] == '\v')
+		if ((tab[i] == '\t' || tab[i] == '\r' || tab[i] == '\f'
+		|| tab[i] == '\v'))
 		{
 			write(1, "Error, invalid spaces...!\n", 27);
 			return (-1);
@@ -33,10 +34,8 @@ int    ft_check_file(t_env *e, char **tab)
 {
     int i;
 	int	j;
-    int ret;
 
     i = 0;
-    ret = 1;
     if (ft_check_resolution(e, tab) == -1 ||
     	ft_check_ambient(e, tab) == -1 ||
     	ft_check_camera(e, tab) == -1)
@@ -63,10 +62,10 @@ int    ft_check_file(t_env *e, char **tab)
 		if (tab[i][j] == 'c' && tab[i][j + 1] == 'y')
 			if (ft_check_cylinder(tab[i]) == -1)
 				return (-1);
-		if (tab[i][j] == 't' && tab[i][j + 1] == 'r')
+		if (tab[i][j] == 't' && tab[i][j + 1] == 'r' && tab[i][j + 2] == ' ')
 			if (ft_check_triangle(tab[i]) == -1)
 				return (-1);
         i++;
     }
-    return (ret);
+    return (1);
 }

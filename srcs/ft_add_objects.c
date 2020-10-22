@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:19:05 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/13 19:48:45 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/22 17:42:47 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_add_sphere(t_env *e, char *str)
 	it_list = e->scene_head;
 	if (!(object = (t_scene *)malloc(sizeof(t_scene))) ||
 		!(sphere = (t_sphere *)malloc(sizeof(t_sphere))))
-		return ;
-	sphere = ft_new_sphere(str);
+		return;
+	sphere = ft_new_sphere(e, str);
 	object->object = (void *)sphere;
 	object->type = Tsphere;
 	object->color = sphere->color;
@@ -47,7 +47,7 @@ void	ft_add_plane(t_env *e, char *str)
 	if (!(object = (t_scene *)malloc(sizeof(t_scene))) ||
 		!(plane = (t_plane *)malloc(sizeof(t_plane))))
 		return ;
-	plane = ft_new_plane(str);
+	plane = ft_new_plane(e, str);
 	object->object = (void *)plane;
 	object->type = Tplane;
 	object->color = plane->color;
@@ -67,12 +67,15 @@ void	ft_add_cylinder(t_env *e, char *str)
 	t_cylinder	*cylinder;
 	t_scene 	*it_list;
 	t_scene 	*object;
+	t_vector	normal;
 
 	it_list = e->scene_head;
 	if (!(object = (t_scene *)malloc(sizeof(t_scene))) ||
 		!(cylinder = (t_cylinder *)malloc(sizeof(t_cylinder))))
 		return ;
-	cylinder = ft_new_cylinder(str);
+	cylinder = ft_new_cylinder(e, str);
+	cylinder->normal = ft_rot(cylinder->normal, ft_radians(cylinder->rot.x),
+					ft_radians(cylinder->rot.y), ft_radians(cylinder->rot.z));
 	object->object = (void *)cylinder;
 	object->type = Tcylinder;
 	object->color = cylinder->color;
@@ -97,7 +100,9 @@ void	ft_add_square(t_env *e, char *str)
 	if (!(object = (t_scene *)malloc(sizeof(t_scene))) ||
 		!(square = (t_square *)malloc(sizeof(t_square))))
 		return ;
-	square = ft_new_square(str);
+	square = ft_new_square(e, str);
+	square->normal = ft_rot(square->normal, ft_radians(square->rot.x),
+					ft_radians(square->rot.y), ft_radians(square->rot.z));
 	object->object = (void *)square;
 	object->type = Tsquare;
 	object->color = square->color;

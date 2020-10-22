@@ -19,7 +19,7 @@ int	ft_check_commas(char **tab)
 		}
 		if (c > 2)
 		{
-			write(1, "Check number of commas..!\n", 31);
+			write(1, "Check number of commas..!\n", 27);
 			return (-1);
 		}
 		i++;

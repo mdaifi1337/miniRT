@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:53:35 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/05 21:46:30 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/21 18:21:29 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_scene
 typedef struct	s_sphere
 {
 	t_vector	pos;
+	t_vector	trans;
 	t_color		color;
 	int			radius;
 }				t_sphere;
@@ -39,6 +40,8 @@ typedef struct	s_sphere
 typedef struct	s_plane
 {
 	t_vector	pos;
+	t_vector	trans;
+	t_vector	rot;
 	t_color		color;
 	t_vector	normal;
 }				t_plane;
@@ -46,6 +49,8 @@ typedef struct	s_plane
 typedef struct	s_cylinder
 {
 	t_vector	pos;
+	t_vector	trans;
+	t_vector	rot;
 	t_vector	normal;
 	t_vector	start;
 	t_vector	end;
@@ -57,6 +62,8 @@ typedef struct	s_cylinder
 typedef struct	s_square
 {
 	t_vector	pos;
+	t_vector	trans;
+	t_vector	rot;
 	t_vector	normal;
 	t_vector	up;
 	t_vector	right;
