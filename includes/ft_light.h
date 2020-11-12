@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:11:54 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/22 18:14:09 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/07 18:14:59 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ typedef struct	s_light
 	struct s_light	*next;
 }				t_light;
 
-typedef struct	s_Alight
+typedef struct	s_alight
 {
 	int			found;
 	double		intensity;
 	t_color		color;
-}				t_Alight;
+}				t_alight;
 
 #endif

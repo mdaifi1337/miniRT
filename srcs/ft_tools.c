@@ -6,11 +6,11 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 17:18:07 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/21 19:48:17 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/26 13:27:48 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/MiniRT.h"
+#include "../includes/mini_rt.h"
 
 static int	check_sign(const char *str, int i)
 {
@@ -66,13 +66,13 @@ void		double_free(char **str)
 	str = NULL;
 }
 
-double		ft_radians(int angle)
+double		ft_rad(int angle)
 {
 	return ((angle * PI) / 180);
 }
 
-int	ft_free_error(char **tab)
+int			ft_free_error(char **tab)
 {
 	double_free(tab);
-	return (-1);
+	return (0);
 }

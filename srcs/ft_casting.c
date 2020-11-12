@@ -6,11 +6,11 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/01 19:07:12 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/13 18:24:01 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/12 17:57:43 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/MiniRT.h"
+#include "../includes/mini_rt.h"
 
 int	ft_ray_cast(t_env *e, t_scene *head)
 {

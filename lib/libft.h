@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 22:29:59 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/11 17:13:50 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/24 19:05:39 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int				ft_tolower(int c);
 int				ft_toupper(int c);
 int				ft_lstsize(t_list *lst);
 int				ft_atoi(const char *str);
-int 			ft_count_table(char **tab);
-int				ft_check_commas(char **tab);
-int 			ft_is_int(char *str, char *ch);
-int 			ft_is_double(char *str, char *ch);
+int				ft_count_table(char **tab);
+int				ft_check_commas(char *tab);
+int				ft_is_int(char *str, char *ch);
+int				ft_is_double(char *str, char *ch);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_is_between(double n, int min, int max, char *str);

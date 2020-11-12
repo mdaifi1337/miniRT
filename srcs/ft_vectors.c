@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:36:51 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/02/28 15:21:33 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/25 13:18:30 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ t_vector	ft_vector_sub(t_vector v1, t_vector v2)
 	return (result);
 }
 
-t_vector	vectorScale(double c, t_vector v)
+t_vector	vector_scale(double c, t_vector v)
 {
-    t_vector	result;
-	
+	t_vector	result;
+
 	result = (t_vector){v.x * c, v.y * c, v.z * c};
-    return result;
+	return (result);
 }
 
 double		ft_vector_dot(t_vector v1, t_vector v2)
@@ -48,6 +48,7 @@ double		ft_vector_dot(t_vector v1, t_vector v2)
 t_vector	ft_make_vector(double x, double y, double z)
 {
 	t_vector	vec;
+
 	vec.x = x;
 	vec.y = y;
 	vec.z = z;

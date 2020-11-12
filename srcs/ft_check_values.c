@@ -5,75 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/10 16:46:15 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/22 18:29:48 by mdaifi           ###   ########.fr       */
+/*   Created: 2020/10/24 18:15:45 by mdaifi            #+#    #+#             */
+/*   Updated: 2020/11/08 19:21:01 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/MiniRT.h"
+#include "../includes/mini_rt.h"
 
-int    ft_check_nbr(char **tab, char *str, int nbr)
+int	ft_check_nbr(char *tab, char *str, int nbr, char c)
 {
-    int i;
+	char	**tmp;
+	int		i;
 
-    i = ft_count_table(tab);
-    if (i != nbr)
-    {
-        write(1, str, ft_strlen(str));
-        double_free(tab);
-        return (-1);
-    }
-    return (1);
+	tmp = ft_split(tab, c);
+	i = ft_count_table(tmp);
+	if (i != nbr)
+	{
+		write(1, str, ft_strlen(str));
+		double_free(tmp);
+		return (0);
+	}
+	return (1);
 }
 
-int    ft_check_tab_between(char **tab, int min, int max, char *str)
+int	ft_check_tab_between(char *tab, int min, int max, char *str)
 {
-    int i;
-    int nbr;
+	char	**tmp;
+	int		i;
 
-    i = 0;
-    while (tab[i])
-    {
-        if (ft_is_between(ft_atof(tab[i]), min, max, str) == -1)
-        {
-            double_free(tab);
-            return (-1);
-        }
-        i++;
-    }
-    return (1);
+	i = 0;
+	tmp = ft_split(tab, ',');
+	while (tmp[i])
+	{
+		if (!ft_is_between(ft_atof(tmp[i]), min, max, str))
+		{
+			double_free(tmp);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
-int    ft_check_tab_int(char **tab, char *str)
+int	ft_check_tab_int(char *tab, char *str)
 {
-    int i;
+	char	**tmp;
+	int		i;
 
-    i = 0;
-    while (tab[i])
-    {
-        if (ft_is_int(tab[i], str) == -1)
-        {
-            double_free(tab);
-            return (-1);
-        }
-        i++;
-    }
-    return (1);
+	i = 0;
+	tmp = ft_split(tab, ',');
+	while (tmp[i])
+	{
+		if (!ft_is_int(tmp[i], str))
+		{
+			double_free(tmp);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
-int    ft_check_tab_double(char **tab, char *str)
+int	ft_check_tab_double(char *tab, char *str)
 {
-    int i;
+	char	**tmp;
+	int		i;
 
-    i = 0;
-    while (tab[i])
-    {
-        if (ft_is_double(tab[i], str) == -1)
-        {
-            double_free(tab);
-            return (-1);
-        }
-        i++;
-    }
-    return (1);
-}	
+	i = 0;
+	tmp = ft_split(tab, ',');
+	while (tmp[i])
+	{
+		if (!ft_is_double(tmp[i], str))
+		{
+			double_free(tmp);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}

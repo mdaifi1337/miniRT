@@ -6,74 +6,70 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 20:14:13 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/22 18:30:42 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/08 17:55:14 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/MiniRT.h"
+#include "../includes/mini_rt.h"
 
-int		ft_check_ambient(t_env *e, char **str)
+static int	ft_check_ambient_values(char **str, int i)
 {
-	char		**tab;
-	char		**temp;
+	char	**tab;
+
+	tab = ft_split(str[i], ' ');
+	if (!ft_check_nbr(str[i],
+		"Missing or extra Ambient value(s)!..\n", 3, ' '))
+		return (ft_free_error(tab));
+	if (!ft_between(tab[1], "Invalid Ambient intensity...\n", 0, 1))
+		return (ft_free_error(tab));
+	if (!ft_check_color(tab[2], "Invalid Ambient color value(s)...\n"))
+		return (ft_free_error(tab));
+	double_free(tab);
+	return (1);
+}
+
+int			ft_check_ambient(t_env *e, char **str)
+{
 	int			i;
 
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i][0] == 'A')
+		if (str[i][0] == 'A' && str[i][1] == ' ')
 		{
-			e->ambient.found++;
+			e->ambient.found += 1;
 			if (e->ambient.found > 1)
 			{
-				write(1, "Error, Duplicate Ambient !..\n", 30);
-				return (-1);
+				write(1, "Duplicate Ambient !..\n", 23);
+				return (0);
 			}
-			tab = ft_split(str[i], ' ');
-			if (ft_check_commas(tab) == -1)
-				return (ft_free_error(tab));
-			if (ft_check_nbr(tab, "Error, Missing or extra Ambient value(s) !..\n", 3) == -1)
-				return (-1);
-			if (ft_check_between(tab[1], "Error, Invalid Ambient intensity...\n", 0, 1) == -1)
-				return (ft_free_error(tab));
-			temp = ft_split(tab[2], ',');
-			if (ft_check_color(temp, "Error, Invalid Ambient color value(s)...\n") == -1)
-				return (ft_free_error(tab));
-			double_free(temp);
-			double_free(tab);
+			if (!ft_check_ambient_values(str, i))
+				return (0);
 		}
 	}
 	if (e->ambient.found == 0)
 	{
-		write(1, "Error, Ambient not found !..\n", 30);
-		return (-1);
+		write(1, "Ambient not found !..\n", 23);
+		return (0);
 	}
 	return (1);
 }
 
-int     ft_check_light(char *str)
+int			ft_check_light(char *str)
 {
-    char		**tab;
-	char		**temp;
+	char	**tab;
 
 	tab = NULL;
-	temp = NULL;
 	tab = ft_split(str, ' ');
-	if (ft_check_commas(tab) == -1)
+	if (!ft_check_nbr(str, "Missing or extra Light value(s)!..\n", 5, ' '))
 		return (ft_free_error(tab));
-	if (ft_check_nbr(tab, "Error, Missing or extra Light value(s) !..\n", 5) == -1)
-        return (-1);
-	temp = ft_split(tab[1], ',');
-	if (ft_check_vector(temp, "Error, Invalid Light position...\n") == -1)
+	if (!ft_check_vector(tab[1], "Invalid Light position...\n", ','))
 		return (ft_free_error(tab));
-	double_free(temp);
-	if (ft_check_between(tab[2], "Error, Invalid Light intensity...\n", 0, 1) == -1)
+	if (!ft_between(tab[2], "Invalid Light intensity...\n", 0, 1))
 		return (ft_free_error(tab));
-	temp = ft_split(tab[3], ',');
-	if (ft_check_color(temp, "Error, Invalid Light color value(s)...\n") == -1)
+	if (!ft_check_color(tab[3], "Invalid Light color value(s)...\n"))
 		return (ft_free_error(tab));
-	double_free(temp);
-	if (ft_check_trans(tab[4]) == -1)
+	if (!ft_check_trans(tab[4], "Invalid light transition..\n"))
 		return (ft_free_error(tab));
 	double_free(tab);
 	return (1);

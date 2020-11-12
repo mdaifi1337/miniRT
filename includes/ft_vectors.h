@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:37:28 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/02/27 22:38:54 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/07 18:19:30 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct	s_ray
 {
 	t_vector	start;
 	t_vector	dir;
-	t_vector	viewDirection;
 }				t_ray;
 
 #endif

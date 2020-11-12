@@ -6,11 +6,11 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:45:02 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/22 18:17:03 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/11 20:28:51 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/MiniRT.h"
+#include "../includes/mini_rt.h"
 
 t_light		*ft_new_light(char *str)
 {
@@ -41,11 +41,11 @@ t_light		*ft_new_light(char *str)
 	return (light);
 }
 
-t_Alight	ft_new_ambient(char *str)
+t_alight	ft_new_ambient(char *str)
 {
 	char		**tab;
 	char		**temp;
-	t_Alight	ambient;
+	t_alight	ambient;
 
 	tab = NULL;
 	temp = NULL;
@@ -59,14 +59,14 @@ t_Alight	ft_new_ambient(char *str)
 	return (ambient);
 }
 
-void	ft_add_light(t_light **list, char *str)
+void		ft_add_light(t_light **list, char *str)
 {
-	t_light *it_list;
+	t_light	*it_list;
 
 	it_list = (*list);
 	if (*list == NULL)
 		(*list) = ft_new_light(str);
-	else 
+	else
 	{
 		while (it_list->next != NULL)
 			it_list = it_list->next;
@@ -74,11 +74,11 @@ void	ft_add_light(t_light **list, char *str)
 	}
 }
 
-void	ft_light(t_env *e, t_scene *object, t_scene *head, t_light *lights)
+void		ft_light(t_env *e, t_scene *object, t_scene *head, t_light *lights)
 {
-	t_vector		tmp;
-	t_Alight		ambient;
-	t_light			*light;
+	t_vector	tmp;
+	t_alight	ambient;
+	t_light		*light;
 
 	init_phong(e);
 	tmp = e->ray.dir;
@@ -86,10 +86,10 @@ void	ft_light(t_env *e, t_scene *object, t_scene *head, t_light *lights)
 	ambient = ft_ambient(object, e);
 	while (light != NULL)
 	{
-		light->dist_to_light = ft_vector_sub(light->pos, object->intersect_point);
-		e->distance = getNorm(light->dist_to_light);
-		light->dist_to_light = getNormalized(light->dist_to_light);
-		e->ray.start = object->intersect_point;
+		light->dist_to_light = ft_vector_sub(light->pos, object->inter_point);
+		e->distance = get_norm(light->dist_to_light);
+		light->dist_to_light = get_normalized(light->dist_to_light);
+		e->ray.start = object->inter_point;
 		e->ray.dir = light->dist_to_light;
 		if (!ft_shadow_cast(e, head))
 		{
@@ -98,5 +98,6 @@ void	ft_light(t_env *e, t_scene *object, t_scene *head, t_light *lights)
 		}
 		light = light->next;
 	}
+	free(light);
 	final_color(e, &ambient);
 }

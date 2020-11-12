@@ -6,16 +6,16 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:36:15 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/10 15:39:32 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/10/24 18:21:12 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_count_table(char **tab)
+int	ft_count_table(char **tab)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (tab[i])
-        i++;
-    return (i);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

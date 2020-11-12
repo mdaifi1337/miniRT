@@ -1,113 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/25 13:24:32 by mdaifi            #+#    #+#             */
+/*   Updated: 2020/11/12 18:18:46 by mdaifi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/mini_rt.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdbool.h>
-#include "../includes/MiniRT.h"
-#include <mlx.h>
-#include <math.h>
-#include <fcntl.h>
 
-int	get_int(t_color clr)
+/*
+**clamp_colors aka 0 > color > 255
+** bleu
+** green
+** red
+*/
+
+int			main(int argc, char **argv)
 {
-	char color[4];
+	t_env	e;
 
-	//clamp_colors aka 0 > color > 255
-	color[0] = clr.blue * 255; //bleu
-	color[1] = clr.green * 255;	//green
-	color[2] = clr.red * 255;	//red
-	color[3] = 0;
-	return (*(int *)color);
-}
-
-void	clamp_colors(t_color *clr, int min, int max)
-{
-	clr->red = clr->red < min ? min : clr->red;
-	clr->red = clr->red > max ? max : clr->red;
-	clr->green = clr->green < min ? min : clr->green;
-	clr->green = clr->green > max ? max : clr->green;
-	clr->blue = clr->blue < min ? min : clr->blue;
-	clr->blue = clr->blue > max ? max : clr->blue;
-}
-
-void	draw(t_env *e, t_scene *head)
-{
-	e->x = 0;
-	e->cam = *(e->cam_list);
-	camera(e);
-	while (e->x < e->WIDTH)
-	{
-		e->y = e->HEIGHT;
-		while (e->y > 0)
-		{
-			ft_make_ray(e, e->x, e->y);
-			if (ft_ray_cast(e, head))
-			{
-				ft_light(e, e->object, head, e->light_list);
-				e->mlx->mlx_data[(e->HEIGHT - e->y)
-				* e->WIDTH + e->x] = get_int(e->phong);
-			}
-			e->y--;
-		}
-		e->x++;
-	}
-}
-
-int key(int khook, t_env *e)
-{	
-	if (khook == 53)
-		exit(0);
-	return (0);
-}
-
-int		close_win(void *param)
-{
-	(void)param;
-	exit(0);
-	return (0);
-}
-
-int		mouse_press(int button, int x, int y, t_env *e)
-{
-	if (button == 1)
-	{
-		printf("%d, %d\n", x, y);
-		return (1);
-	}
-	return (0);
-}
-
-int main()
-{
-	t_env e;
-
-	init_vars(&e);
+	// ft_check_file_ext(argc, argv);
+	ft_check_second_arg(&e, argc, argv[2]);
 	ft_parse("test.rt", &e);
+	init_vars(&e);
+	if (e.save == 1)
+		ft_save_bmp(&e);
 	e.mlx = init(&e);
-	// // e->cam.pos = (t_vector){0, 0, 0};
-	// // e->sphere.pos = (t_vector){0, 0, 30};
-	// // e->sphere.color.red = 255;
-	// // e->sphere.color.green = 0;
-	// // e->sphere.color.blue = 0;
-	// // e->sphere.radius = 10;
-	// // e->plane.pos = (t_vector){0, -10, 0};
-	// // e->plane.normal = (t_vector){0, 1, 0};
-	// // e->plane.color = (t_color){0, 255, 255};
-	// // e->light.color.red = 255;
-	// // e->light.color.green = 255;
-	// // e->light.color.blue = 255;
-	// // e->light.pos = (t_vector){50, 100, -30};
-	// // e->light.intensity = 0.7;
-	// // e->ambient.color.red = 255;
-	// // e->ambient.color.green = 255;
-	// // e->ambient.color.blue = 255;
-	// // e->ambient.intensity = 0.2;
-	// // e->cam.fov = (90 * PI) / 180;
-	draw(&e, e.scene_head);
+	ft_draw(&e);
 	mlx_hook(e.mlx->mlx_win, 17, 0, &close_win, &e);
-	mlx_hook(e.mlx->mlx_win, 2, KeyPressMask, key, &e);
-	mlx_hook(e.mlx->mlx_win, 4, 0, mouse_press, &e);
-	mlx_put_image_to_window(e.mlx->mlx_ptr, e.mlx->mlx_win, e.mlx->mlx_img, 0, 0);
+	mlx_hook(e.mlx->mlx_win, 2, 0, key, &e);
+	mlx_put_image_to_window(e.mlx->mlx_ptr, e.mlx->mlx_win,
+							e.mlx->mlx_img, 0, 0);
+	mlx_string_put(e.mlx->mlx_ptr, e.mlx->mlx_win, 10, 10,
+				0x8B4513, "Camera 1");
+	mlx_string_put(e.mlx->mlx_ptr, e.mlx->mlx_win, 110, 10, 0x8B4513, "-");
+	mlx_string_put(e.mlx->mlx_ptr, e.mlx->mlx_win, 140,
+				10, 0x8B4513, "Press 'c' to switch camera");
 	mlx_loop(e.mlx->mlx_ptr);
 	return (0);
 }

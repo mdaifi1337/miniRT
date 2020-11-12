@@ -6,174 +6,147 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 13:42:21 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/22 17:48:02 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/06 18:58:18 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/MiniRT.h"
+#include "../includes/mini_rt.h"
 
-t_sphere	*ft_new_sphere(t_env *e, char *str)
+t_sphere	*ft_new_sphere(char *str)
 {
 	char		**tab;
-	char		**temp;
-	t_sphere	*sphere;
+	char		**tmp;
+	t_sphere	*sp;
 
 	tab = NULL;
-	temp = NULL;
-	sphere = (t_sphere *)malloc(sizeof(t_sphere));
+	tmp = NULL;
+	if (!(sp = (t_sphere *)malloc(sizeof(t_sphere))))
+		return (NULL);
 	tab = ft_split(str, ' ');
-	temp = ft_split(tab[4], ',');
-	sphere->trans = (t_vector){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
-	temp = ft_split(tab[1], ',');
-	sphere->pos = ft_make_vector(ft_atof(temp[0]) + sphere->trans.x,
-				ft_atof(temp[1]) + sphere->trans.y,
-				ft_atof(temp[2]) + sphere->trans.z);
-	sphere->radius = ft_atof(tab[2]);
-	double_free(temp);
-	temp = ft_split(tab[3], ',');
-	sphere->color = (t_color){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
+	tmp = ft_split(tab[4], ',');
+	sp->trs = (t_vector){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
+	tmp = ft_split(tab[1], ',');
+	sp->pos = ft_make_vector(ft_atof(tmp[0]) + sp->trs.x,
+			ft_atof(tmp[1]) + sp->trs.y, ft_atof(tmp[2]) + sp->trs.z);
+	sp->radius = ft_atof(tab[2]);
+	double_free(tmp);
+	tmp = ft_split(tab[3], ',');
+	sp->color = (t_color){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
 	double_free(tab);
-	return (sphere);
+	return (sp);
 }
 
-t_plane		*ft_new_plane(t_env *e, char *str)
+t_plane		*ft_new_plane(char *str)
 {
 	char		**tab;
-	char		**temp;
-	t_plane		*plane;
+	char		**tmp;
+	t_plane		*pl;
 
 	tab = NULL;
-	temp = NULL;
-	plane = (t_plane *)malloc(sizeof(t_plane));
+	tmp = NULL;
+	if (!(pl = (t_plane *)malloc(sizeof(t_plane))))
+		return (NULL);
 	tab = ft_split(str, ' ');
-	temp = ft_split(tab[4], ',');
-	plane->trans = (t_vector){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
-	temp = ft_split(tab[5], ',');
-	plane->rot = (t_vector){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
-	temp = ft_split(tab[1], ',');
-	plane->pos = ft_make_vector(ft_atof(temp[0]) + plane->trans.x,
-				ft_atof(temp[1]) + plane->trans.y,
-				ft_atof(temp[2]) + plane->trans.z);
-	double_free(temp);
-	temp = ft_split(tab[2], ',');
-	plane->normal = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
-	temp = ft_split(tab[3], ',');
-	plane->color = (t_color){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
+	pl->trs = ft_add_trs(tab[4]);
+	pl->rot = ft_add_rot(tab[5]);
+	tmp = ft_split(tab[1], ',');
+	pl->pos = (t_vector){ft_atof(tmp[0]) + pl->trs.x,
+				ft_atof(tmp[1]) + pl->trs.y, ft_atof(tmp[2]) + pl->trs.z};
+	double_free(tmp);
+	tmp = ft_split(tab[2], ',');
+	pl->normal = (t_vector){ft_atof(tmp[0]) + pl->rot.x, ft_atof(tmp[1])
+				+ pl->rot.y, ft_atof(tmp[2]) + pl->rot.z};
+	double_free(tmp);
+	tmp = ft_split(tab[3], ',');
+	pl->color = (t_color){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
 	double_free(tab);
-	return (plane);
+	return (pl);
 }
 
-t_cylinder	*ft_new_cylinder(t_env *e, char *str)
+t_cylinder	*ft_new_cylinder(char *str)
 {
 	char		**tab;
-	char		**temp;
-	t_cylinder	*cylinder;
+	char		**tmp;
+	t_cylinder	*cy;
 
 	tab = NULL;
-	temp = NULL;
-	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
+	tmp = NULL;
+	if (!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
+		return (NULL);
 	tab = ft_split(str, ' ');
-	temp = ft_split(tab[6], ',');
-	cylinder->trans = (t_vector){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
-	temp = ft_split(tab[7], ',');
-	cylinder->rot = (t_vector){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
-	temp = ft_split(tab[1], ',');
-	cylinder->pos = ft_make_vector(ft_atof(temp[0]) + cylinder->trans.x,
-				ft_atof(temp[1]) + cylinder->trans.y,
-				ft_atof(temp[2]) + cylinder->trans.z);
-	double_free(temp);
-	temp = ft_split(tab[2], ',');
-	cylinder->normal = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
-	cylinder->width = ft_atof(tab[3]);
-	cylinder->height = ft_atof(tab[4]);
-	temp = ft_split(tab[5], ',');
-	cylinder->color = (t_color){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
+	ft_add_trs_and_rot(&cy->trs, tab[6], &cy->rot, tab[7]);
+	tmp = ft_split(tab[1], ',');
+	cy->pos = (t_vector){ft_atof(tmp[0]) + cy->trs.x,
+				ft_atof(tmp[1]) + cy->trs.y, ft_atof(tmp[2]) + cy->trs.z};
+	double_free(tmp);
+	tmp = ft_split(tab[2], ',');
+	cy->normal = (t_vector){ft_atof(tmp[0]) + cy->rot.x, ft_atof(tmp[1])
+				+ cy->rot.y, ft_atof(tmp[2]) + cy->rot.z};
+	double_free(tmp);
+	cy->width = ft_atof(tab[3]);
+	cy->height = ft_atof(tab[4]);
+	tmp = ft_split(tab[5], ',');
+	cy->color = (t_color){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
 	double_free(tab);
-	return (cylinder);
+	return (cy);
 }
 
-t_square	*ft_new_square(t_env *e, char *str)
+t_square	*ft_new_square(char *str)
 {
 	char		**tab;
-	char		**temp;
-	t_square	*square;
+	char		**tmp;
+	t_square	*sq;
 
 	tab = NULL;
-	temp = NULL;
-	square = (t_square *)malloc(sizeof(t_square));
+	tmp = NULL;
+	if (!(sq = (t_square *)malloc(sizeof(t_square))))
+		return (NULL);
 	tab = ft_split(str, ' ');
-	temp = ft_split(tab[5], ',');
-	square->trans = ft_make_vector(ft_atof(temp[0]),ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
-	temp = ft_split(tab[6], ',');
-	square->rot = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
-	temp = ft_split(tab[1], ',');
-	square->pos = ft_make_vector(ft_atof(temp[0]) + square->trans.x,
-				ft_atof(temp[1]) + square->trans.y,
-				ft_atof(temp[2]) + square->trans.z);
-	double_free(temp);
-	temp = ft_split(tab[2], ',');
-	square->normal = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
-	square->side = ft_atof(tab[3]);
-	temp = ft_split(tab[4], ',');
-	square->color = (t_color){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
+	sq->trs = ft_add_trs(tab[5]);
+	sq->rot = ft_add_rot(tab[6]);
+	tmp = ft_split(tab[1], ',');
+	sq->pos = (t_vector){ft_atof(tmp[0]) + sq->trs.x,
+				ft_atof(tmp[1]) + sq->trs.y, ft_atof(tmp[2]) + sq->trs.z};
+	double_free(tmp);
+	tmp = ft_split(tab[2], ',');
+	sq->normal = (t_vector){ft_atof(tmp[0]) + sq->rot.x, ft_atof(tmp[1])
+				+ sq->rot.y, ft_atof(tmp[2]) + sq->rot.z};
+	double_free(tmp);
+	sq->side = ft_atof(tab[3]);
+	tmp = ft_split(tab[4], ',');
+	sq->color = (t_color){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
 	double_free(tab);
-	return (square);
+	return (sq);
 }
 
 t_triangle	*ft_new_triangle(char *str)
 {
 	char		**tab;
-	char		**temp;
-	t_triangle	*triangle;
+	char		**tmp;
+	t_triangle	*tr;
 
 	tab = NULL;
-	temp = NULL;
-	triangle = (t_triangle *)malloc(sizeof(t_triangle));
+	tmp = NULL;
+	if (!(tr = (t_triangle *)malloc(sizeof(t_triangle))))
+		return (NULL);
 	tab = ft_split(str, ' ');
-	temp = ft_split(tab[1], ',');
-	triangle->A = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
-	temp = ft_split(tab[2], ',');
-	triangle->B = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
-	temp = ft_split(tab[3], ',');
-	triangle->C = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
-	temp = ft_split(tab[4], ',');
-	triangle->color = (t_color){ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2])};
-	double_free(temp);
+	tmp = ft_split(tab[1], ',');
+	tr->a = (t_vector){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
+	tmp = ft_split(tab[2], ',');
+	tr->b = (t_vector){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
+	tmp = ft_split(tab[3], ',');
+	tr->c = (t_vector){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
+	tmp = ft_split(tab[4], ',');
+	tr->color = (t_color){ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2])};
+	double_free(tmp);
 	double_free(tab);
-	return (triangle);
+	return (tr);
 }
