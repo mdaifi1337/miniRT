@@ -24,10 +24,11 @@ $(NAME): lib_rule $(OBJ)
 		gcc $(LIBFT) $(OBJ) $(FLAGS) -o $(NAME) $(LIBS) 
 
 %.o: %.c
-		gcc  -g -c $< -o $@
+		gcc $(FLAGS) -g -c $< -o $@
 
 clean:
 		make clean -C ./lib
+		rm miniRT.bmp
 		rm -f srcs/*.o
 fclean: clean
 		make fclean -C ./lib

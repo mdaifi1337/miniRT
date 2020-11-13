@@ -6,13 +6,11 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 13:24:32 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/12 18:18:46 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/13 18:50:08 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /*
 **clamp_colors aka 0 > color > 255
@@ -25,9 +23,9 @@ int			main(int argc, char **argv)
 {
 	t_env	e;
 
-	// ft_check_file_ext(argc, argv);
+	ft_check_file_ext(argc, argv);
 	ft_check_second_arg(&e, argc, argv[2]);
-	ft_parse("test.rt", &e);
+	ft_parse(argv[1], &e);
 	init_vars(&e);
 	if (e.save == 1)
 		ft_save_bmp(&e);

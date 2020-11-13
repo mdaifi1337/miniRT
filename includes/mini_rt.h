@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:21:36 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/11 19:31:27 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/13 18:52:26 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <math.h>
 # include <mlx.h>
 # define PI 3.141592653589793
-# define RAY_DIS_MAX 1e30f
+# define RAY_DIS_MAX 1e30
 # define INT_MAX 2147483647
 
 typedef struct	s_env
@@ -114,9 +114,9 @@ void			normalize(t_vector *ret);
 void			ft_parse(char *file, t_env *e);
 void			ft_draw(t_env *e);
 void			plane_normal(t_env *e, t_scene *scene);
-void			sphere_normal(t_scene *scene);
+void			sphere_normal(t_env *e, t_scene *scene);
 void			square_normal(t_env *e, t_scene *scene);
-void			triangle_normal(t_scene *scene);
+void			triangle_normal(t_env *e, t_scene *scene);
 void			cylinder_normal(t_env *e, t_scene *scene);
 void			ft_make_ray(t_env *mlx, int x, int y);
 void			ft_get_normal(t_env *e, t_scene *head);

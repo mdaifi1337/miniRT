@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 12:20:23 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/11 19:32:41 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/13 17:55:30 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void		ft_get_normal(t_env *e, t_scene *head)
 	if (scene->type == Tplane)
 		plane_normal(e, scene);
 	else if (scene->type == Tsphere)
-		sphere_normal(scene);
+		sphere_normal(e, scene);
 	else if (scene->type == Tsquare)
 		square_normal(e, scene);
 	else if (scene->type == Tcylinder)
 		cylinder_normal(e, scene);
 	else if (scene->type == Ttriangle)
-		triangle_normal(scene);
+		triangle_normal(e, scene);
 }

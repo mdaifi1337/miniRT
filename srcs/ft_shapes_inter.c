@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:26:17 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/12 17:54:31 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/13 17:48:12 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	inter_ray_tr(t_env *e, t_triangle *triangle)
 	tr.v2 = ft_vector_sub(triangle->c, triangle->a);
 	tr.ray_cross_v2 = cross_product(&e->ray.dir, &tr.v2);
 	tr.det = ft_vector_dot(tr.v1, tr.ray_cross_v2);
-	if (tr.det > -0.0000001 && tr.det < 0.0000001)
+	if (tr.det > -0.0001 && tr.det < 0.0001)
 		return (0);
 	tr.p = ft_vector_sub(e->ray.start, triangle->a);
 	tr.u = (1.0 / tr.det) * ft_vector_dot(tr.p, tr.ray_cross_v2);
@@ -71,7 +71,7 @@ int	inter_ray_tr(t_env *e, t_triangle *triangle)
 	if (tr.v < 0.0 || (tr.u + tr.v) > 1.0)
 		return (0);
 	tr.new_dist = (1.0 / tr.det) * ft_vector_dot(tr.v2, tr.o_cross_v1);
-	if (tr.new_dist > 0.0000001 && tr.new_dist < e->distance)
+	if (tr.new_dist > 0.0001 && tr.new_dist < e->distance)
 	{
 		e->distance = tr.new_dist;
 		return (1);
