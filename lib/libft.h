@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 22:29:59 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/24 19:05:39 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/22 19:54:22 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int				ft_tolower(int c);
 int				ft_toupper(int c);
 int				ft_lstsize(t_list *lst);
 int				ft_atoi(const char *str);
+int				ft_free_error(char **tab);
 int				ft_count_table(char **tab);
-int				ft_check_commas(char *tab);
+int				ft_check_commas(char *str, char *tab);
 int				ft_is_int(char *str, char *ch);
 int				ft_is_double(char *str, char *ch);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -51,6 +52,7 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 size_t			ft_strlen(const char *ch);
 size_t			ft_strlcpy(char *dst, char *src, size_t size);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
+void			double_free(char **str);
 void			ft_bzero(void *s, size_t n);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putchar_fd(char c, int fd);

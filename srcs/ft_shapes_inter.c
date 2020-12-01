@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 16:26:17 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/13 17:48:12 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/26 17:36:59 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	inter_ray_pl(t_env *e, t_plane *plane)
 	{
 		inter_point = ft_vector_sub(e->ray.start, plane->pos);
 		tmp = -ft_vector_dot(inter_point, plane->normal) / denom;
-		if (tmp > 0 && tmp > 0.0001 && tmp < e->distance)
+		if (tmp > 0.0001 && tmp < e->distance)
 		{
 			e->distance = tmp;
 			return (1);

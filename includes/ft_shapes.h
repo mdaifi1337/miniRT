@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:53:35 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/11 19:24:33 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/18 17:43:47 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct	s_triangle
 	t_vector	b;
 	t_vector	c;
 	t_color		color;
+	t_vector	trs;
 }				t_triangle;
 
 typedef struct	s_tr_vars

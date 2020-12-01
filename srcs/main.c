@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 13:24:32 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/13 18:50:08 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/12/01 17:32:10 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int			main(int argc, char **argv)
 
 	ft_check_file_ext(argc, argv);
 	ft_check_second_arg(&e, argc, argv[2]);
-	ft_parse(argv[1], &e);
 	init_vars(&e);
+	ft_parse(argv[1], &e);
 	if (e.save == 1)
 		ft_save_bmp(&e);
 	e.mlx = init(&e);

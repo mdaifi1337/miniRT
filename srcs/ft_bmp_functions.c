@@ -6,12 +6,11 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:54:27 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/10 11:39:25 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/22 18:21:53 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
-#include <stdio.h>
 
 unsigned char	*ft_bmp_header(t_bfh bfh, t_bih bih)
 {

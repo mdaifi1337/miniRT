@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 13:26:19 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/13 18:52:39 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/21 19:29:24 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	ft_draw_next_cam_image(t_env *e)
 	char	*str;
 
 	str = ft_itoa(e->cam_count);
+	mlx_clear_window(e->mlx->mlx_ptr, e->mlx->mlx_win);
 	mlx_destroy_image(e->mlx->mlx_ptr, e->mlx->mlx_img);
 	e->mlx->mlx_img = mlx_new_image(e->mlx->mlx_ptr, e->width, e->height);
 	ft_draw(e);
@@ -28,6 +29,7 @@ static void	ft_draw_next_cam_image(t_env *e)
 	mlx_string_put(e->mlx->mlx_ptr, e->mlx->mlx_win, 80, 10, 0x8B4513, str);
 	mlx_string_put(e->mlx->mlx_ptr, e->mlx->mlx_win, 140,
 				10, 0x8B4513, "Press 'c' to switch camera");
+	free(str);
 }
 
 int			key(int khook, t_env *e)

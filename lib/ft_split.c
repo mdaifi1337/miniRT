@@ -6,12 +6,11 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 20:04:19 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/12 20:28:45 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/21 18:57:11 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static char	**allocate(char *tmp, char c, int j)
 {
@@ -43,6 +42,7 @@ static char	**allocate(char *tmp, char c, int j)
 
 char		**ft_split(char const *s, char c)
 {
+	char			**str;
 	char			*tmp;
 	int				i;
 	int				j;
@@ -57,11 +57,12 @@ char		**ft_split(char const *s, char c)
 	{
 		while (tmp[i])
 		{
-			if (tmp[i] == c && tmp[i + 1] != c)
+			if (tmp[i] == c)
 				j++;
 			i++;
 		}
-		return (allocate(tmp, c, j));
+		str = allocate(tmp, c, j);
+		return (str);
 	}
 	return (NULL);
 }

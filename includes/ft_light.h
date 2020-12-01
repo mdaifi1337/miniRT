@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:11:54 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/07 18:14:59 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/26 16:50:41 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct	s_light
 {
 	t_vector		dist_to_light;
 	t_vector		pos;
-	t_vector		trans;
+	t_vector		trs;
 	t_color			color;
 	double			intensity;
 	struct s_light	*next;

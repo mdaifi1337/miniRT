@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 18:15:45 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/08 19:21:01 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/22 19:42:35 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_check_nbr(char *tab, char *str, int nbr, char c)
 		double_free(tmp);
 		return (0);
 	}
+	double_free(tmp);
 	return (1);
 }
 
@@ -44,6 +45,7 @@ int	ft_check_tab_between(char *tab, int min, int max, char *str)
 		}
 		i++;
 	}
+	double_free(tmp);
 	return (1);
 }
 
@@ -63,6 +65,7 @@ int	ft_check_tab_int(char *tab, char *str)
 		}
 		i++;
 	}
+	double_free(tmp);
 	return (1);
 }
 
@@ -82,5 +85,6 @@ int	ft_check_tab_double(char *tab, char *str)
 		}
 		i++;
 	}
+	double_free(tmp);
 	return (1);
 }

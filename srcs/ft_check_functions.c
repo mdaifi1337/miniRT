@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:41:42 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/26 13:27:01 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/14 12:13:29 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_check_vector(char *tab, char *str, char c)
 {
 	if (!ft_check_nbr(tab, str, 3, c) ||
-		!ft_check_tab_double(tab, str) || !ft_check_commas(tab))
+		!ft_check_tab_double(tab, str) || !ft_check_commas(str, tab))
 		return (0);
 	return (1);
 }
@@ -30,7 +30,7 @@ int	ft_between(char *tab, char *str, double min, double max)
 int	ft_check_color(char *str, char *ch)
 {
 	if (!ft_check_nbr(str, ch, 3, ',') || !ft_check_tab_int(str, ch)
-		|| !ft_check_tab_between(str, 0, 255, ch) || !ft_check_commas(str))
+		|| !ft_check_tab_between(str, 0, 255, ch) || !ft_check_commas(ch, str))
 		return (0);
 	return (1);
 }
@@ -38,7 +38,7 @@ int	ft_check_color(char *str, char *ch)
 int	ft_check_normal(char *tab, char *str)
 {
 	if (!ft_check_nbr(tab, str, 3, ',') || !ft_check_tab_double(tab, str) ||
-		!ft_check_tab_between(tab, -1, 1, str) || !ft_check_commas(tab))
+		!ft_check_tab_between(tab, -1, 1, str) || !ft_check_commas(str, tab))
 		return (0);
 	return (1);
 }

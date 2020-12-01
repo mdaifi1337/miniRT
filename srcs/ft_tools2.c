@@ -6,17 +6,11 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 17:20:30 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/10 11:33:26 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/28 17:18:37 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
-
-void	ft_add_trs_and_rot(t_vector *trs, char *str1, t_vector *rot, char *str2)
-{
-	*trs = ft_add_trs(str1);
-	*rot = ft_add_rot(str2);
-}
 
 void	clamp_colors(t_color *clr, int min, int max)
 {
@@ -44,4 +38,17 @@ int		ft_smallest_value(t_env *e)
 	}
 	else
 		return (0);
+}
+
+int		ft_found(char *str, char *ch, int j)
+{
+	if (!ft_strncmp(str + j, ch, ft_strlen(ch)))
+		return (1);
+	return (0);
+}
+
+void		ft_free_strings(char **scene, char *str)
+{
+	free(str);
+	double_free(scene);
 }

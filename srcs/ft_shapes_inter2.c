@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 12:39:59 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/05 17:59:29 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/22 18:03:28 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			inter_ray_sq(t_env *e, t_square *sq)
 		free(plane);
 		return (ft_int_ray_pl_sq(e, sq, temp_dist));
 	}
+	free(plane);
 	return (0);
 }
 

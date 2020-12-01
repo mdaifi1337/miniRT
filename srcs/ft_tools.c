@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 17:18:07 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/10/26 13:27:48 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/22 19:53:43 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,7 @@ double		ft_atof(const char *str)
 	return (result * sign);
 }
 
-void		double_free(char **str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	str = NULL;
-}
-
 double		ft_rad(int angle)
 {
 	return ((angle * PI) / 180);
-}
-
-int			ft_free_error(char **tab)
-{
-	double_free(tab);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 16:02:44 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/07 18:18:00 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/26 17:43:45 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		ft_specular(t_scene *scene, t_env *e, t_light *list, t_vector tmp)
 
 	n = 60;
 	r = 2.0 * ft_vector_dot(list->dist_to_light, scene->normal);
-	reflection = vector_scale(r, get_normalized(scene->normal));
+	reflection = vector_scale(r, scene->normal);
 	res = get_normalized(ft_vector_sub(list->dist_to_light, reflection));
 	term = pow(fmax(0.0f, ft_vector_dot(tmp, res)), n);
 	e->specular.red += list->intensity * (list->color.red / 255) * term;

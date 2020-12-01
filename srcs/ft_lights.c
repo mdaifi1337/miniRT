@@ -6,13 +6,13 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:45:02 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/11 20:28:51 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/28 19:07:26 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
-t_light		*ft_new_light(char *str)
+t_light		*ft_new_light(char **str, int *i)
 {
 	char		**tab;
 	char		**temp;
@@ -20,16 +20,15 @@ t_light		*ft_new_light(char *str)
 
 	tab = NULL;
 	temp = NULL;
-	light = (t_light *)malloc(sizeof(t_light));
-	tab = ft_split(str, ' ');
-	temp = ft_split(tab[4], ',');
-	light->trans = ft_make_vector(ft_atof(temp[0]), ft_atof(temp[1]),
-				ft_atof(temp[2]));
-	double_free(temp);
+	if (!(light = (t_light *)malloc(sizeof(t_light))))
+		return (NULL);
+	tab = ft_split(str[*i], ' ');
+	light->trs = ft_trs_and_rot(str,
+		"Error\nInvalid light transition!..\n", i, NULL);
 	temp = ft_split(tab[1], ',');
-	light->pos = ft_make_vector(ft_atof(temp[0]) + light->trans.x,
-				ft_atof(temp[1]) + light->trans.y,
-				ft_atof(temp[2]) + light->trans.z);
+	light->pos = ft_make_vector(ft_atof(temp[0]) + light->trs.x,
+				ft_atof(temp[1]) + light->trs.y,
+				ft_atof(temp[2]) + light->trs.z);
 	double_free(temp);
 	light->intensity = ft_atof(tab[2]);
 	temp = ft_split(tab[3], ',');
@@ -59,18 +58,18 @@ t_alight	ft_new_ambient(char *str)
 	return (ambient);
 }
 
-void		ft_add_light(t_light **list, char *str)
+void		ft_add_light(t_light **list, char **str, int *i)
 {
 	t_light	*it_list;
 
 	it_list = (*list);
 	if (*list == NULL)
-		(*list) = ft_new_light(str);
+		(*list) = ft_new_light(str, i);
 	else
 	{
 		while (it_list->next != NULL)
 			it_list = it_list->next;
-		it_list->next = ft_new_light(str);
+		it_list->next = ft_new_light(str, i);
 	}
 }
 
@@ -98,6 +97,5 @@ void		ft_light(t_env *e, t_scene *object, t_scene *head, t_light *lights)
 		}
 		light = light->next;
 	}
-	free(light);
 	final_color(e, &ambient);
 }

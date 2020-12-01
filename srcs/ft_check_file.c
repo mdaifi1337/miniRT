@@ -6,7 +6,7 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 15:13:40 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/11/07 18:14:17 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/25 17:17:07 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_check_spaces(char *tab)
 		if ((tab[i] == '\t' || tab[i] == '\r' || tab[i] == '\f'
 		|| tab[i] == '\v'))
 		{
-			write(1, "Error, invalid spaces...!\n", 27);
+			write(1, "Error\ninvalid spaces !..\n", 26);
 			return (0);
 		}
 		i++;
@@ -53,7 +53,7 @@ static int	ft_check_values(char **tab, int i, int j)
 	if (tab[i][j] == 'c' && tab[i][j + 1] == 'y')
 		if (!ft_check_cylinder(tab[i]))
 			return (0);
-	if (tab[i][j] == 't' && tab[i][j + 1] == 'r')
+	if (tab[i][j] == 't' && tab[i][j + 1] == 'r' && tab[i][j + 2] == ' ')
 		if (!ft_check_triangle(tab[i]))
 			return (0);
 	return (1);

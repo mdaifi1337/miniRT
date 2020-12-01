@@ -6,12 +6,11 @@
 /*   By: mdaifi <mdaifi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 21:38:42 by mdaifi            #+#    #+#             */
-/*   Updated: 2020/03/12 19:38:37 by mdaifi           ###   ########.fr       */
+/*   Updated: 2020/11/22 18:21:57 by mdaifi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char		*ft_strtrim(char const *s1, char const *set)
 {
